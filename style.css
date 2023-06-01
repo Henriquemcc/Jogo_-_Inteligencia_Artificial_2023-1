@@ -1,0 +1,31 @@
+#timer {
+    font-family: Arial, sans-serif;
+    font-size: 36pt;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.bloco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+
+}
+
+#areaControles {
+    text-align: center;
+}
+
+#areaControles {
+    margin-top: 10px;
+}
