@@ -29,3 +29,13 @@
 #areaControles {
     margin-top: 10px;
 }
+
+.textoObjetivo {
+    width: 100%;
+    height: 100%;
+}
+
+.textoObjetivo::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
