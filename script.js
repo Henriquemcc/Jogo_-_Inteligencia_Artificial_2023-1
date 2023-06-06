@@ -340,7 +340,14 @@ function tratarCliqueNoBloco(e) {
         let blocoSelecionado = obterBloco(linha = e.target.getAttribute('i'), coluna = e.target.getAttribute('j'));
         let blocoVazio = obterBlocoVazio();
         if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) == 1) {
+
+            // Alterando posição dos blocos
             swap(blocoSelecionado, blocoVazio);
+            
+            // Exibindo mensagem de vitória ao jogador
+            if (arraysSaoIguais(getEstado(), getObjetivo())) {
+                venceuJogo();
+            }
         } else {
             window.alert("Bloco inválido");
         }
@@ -367,9 +374,8 @@ function arraysSaoIguais(array1, array2) {
     for (let i = 0; i < array1.length; i++) {
 
         // Realizando recursividade caso seja um array multidimensional
-        if (Array.isArray(array1[i]) && Array.isArray(array2[i]) && (!arraysSaoIguais(array1[i], array2[i]))) {
-            return false;
-
+        if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
+            return arraysSaoIguais(array1[i], array2[i]);
         }
         // Comparando elemento por elemento
         else if (array1[i] !== array2[i]) {
@@ -418,11 +424,6 @@ function setEstado(novoEstado) {
             tagJogo.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
             tagJogo.onclick = tratarCliqueNoBloco;
         }
-    }
-
-    // Exibindo mensagem de vitória ao jogador
-    if (arraysSaoIguais(__estado, getObjetivo())) {
-        venceuJogo();
     }
 }
 
