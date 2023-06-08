@@ -163,8 +163,9 @@ class Grade {
     }
 
     habilitarModoEdicao() {
+        let dados = converterArrayBidimensionalParaUnidimensional(this.__array);
         for (let i = 0; i < this.elementoHtml.childNodes.length; i++) {
-            this.elementoHtml.childNodes[i].innerHTML = "<div class=\"form-control\"><input class=\"textoObjetivo\" type=\"number\"></div>";
+            this.elementoHtml.childNodes[i].innerHTML = `<div class=\"form-control\"><input class=\"textoObjetivo\" type=\"number\" value=\"${dados[i]}\"></div>`;
         }
     }
 
