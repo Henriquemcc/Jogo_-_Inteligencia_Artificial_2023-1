@@ -254,9 +254,9 @@ function obterEstadoAleatorioParaOsBlocos() {
 }
 
 /**
- * Trata o clique no botão novo objetivo.
+ * Trata o clique no botão novo jogo.
  */
-function novoObjetivo() {
+function novoJogo() {
     setObjetivo(obterEstadoAleatorioParaOsBlocos());
     setEstado(obterEstadoAleatorioParaOsBlocos());
     setTimer(new Timer());
@@ -284,7 +284,7 @@ onload = function () {
     // Associando os botões com as funções
     this.document.getElementById("btInicio").onclick = iniciarJogo;
     this.document.getElementById("btAEstrela").onclick = executarAEstrela;
-    this.document.getElementById("btNovoObjetivo").onclick = novoObjetivo;
+    this.document.getElementById("btNovoJogo").onclick = novoJogo;
     this.document.getElementById("btEditar").onclick = editar;
 
     // Configurando o jogo
