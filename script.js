@@ -491,9 +491,9 @@ function iniciarJogo() {
 }
 
 /**
- * Sai do menu editar objetivo.
+ * Sai do menu editar.
  */
-function editarObjetivoSair() {
+function editarSair() {
     // Desabilitando os botões confirmar e cancelar
     document.getElementById("btConfirmar").style.display = 'none';
     document.getElementById("btConfirmar").onclick = null;
@@ -504,16 +504,16 @@ function editarObjetivoSair() {
     document.getElementById("btInicio").style.display = '';
     document.getElementById("btAEstrela").style.display = '';
     document.getElementById("btNovoObjetivo").style.display = '';
-    document.getElementById("btEditarObjetivo").style.display = '';
+    document.getElementById("btEditar").style.display = '';
 
     // Reconstruindo objetivo do jogo
     setObjetivo(getObjetivo());
 }
 
 /**
- * Função que é executada quando o botão confirmar, dentro da edição do objetivo, é clicado.
+ * Função que é executada quando o botão confirmar, dentro da edição, é clicado.
  */
-function editarObjetivoConfirmar() {
+function editarConfirmar() {
 
     // Obtendo entrada do usuário
     const objetivoJogo = document.getElementById("areaObjetivo");
@@ -536,32 +536,32 @@ function editarObjetivoConfirmar() {
     setObjetivo(novoObjetivo);
 
     // Saindo do jogo
-    editarObjetivoSair();
+    editarSair();
 }
 
 /**
- * Função que é executada quando o botão cancelar, dentro da ediçãoo do objetivo, é clicado.
+ * Função que é executada quando o botão cancelar, dentro da ediçãoo, é clicado.
  */
-function editarObjetivoCancelar() {
-    editarObjetivoSair();
+function editarCancelar() {
+    editarSair();
 }
 
 /**
- * Função que é executada quando o botão editar objetivo é clicado.
+ * Função que é executada quando o botão editar é clicado.
  */
-function editarObjetivo() {
+function editar() {
 
     // Desabilitando os botões padrões
     document.getElementById("btInicio").style.display = 'none';
     document.getElementById("btAEstrela").style.display = 'none';
     document.getElementById("btNovoObjetivo").style.display = 'none';
-    document.getElementById("btEditarObjetivo").style.display = 'none';
+    document.getElementById("btEditar").style.display = 'none';
 
     // Habilitando os botões confirmar e cancelar
     document.getElementById("btConfirmar").style.display = '';
-    document.getElementById("btConfirmar").onclick = editarObjetivoConfirmar;
+    document.getElementById("btConfirmar").onclick = editarConfirmar;
     document.getElementById("btCancelar").style.display = '';
-    document.getElementById("btCancelar").onclick = editarObjetivoCancelar;
+    document.getElementById("btCancelar").onclick = editarCancelar;
 
     // Alterando os elementos de objetivo para caixa de texto
     const objetivoJogo = document.getElementById("areaObjetivo");
@@ -581,7 +581,7 @@ onload = function () {
     this.document.getElementById("btInicio").onclick = iniciarJogo;
     this.document.getElementById("btAEstrela").onclick = executarAEstrela;
     this.document.getElementById("btNovoObjetivo").onclick = novoObjetivo;
-    this.document.getElementById("btEditarObjetivo").onclick = editarObjetivo;
+    this.document.getElementById("btEditar").onclick = editar;
 
     // Configurando o jogo
     setNumeroColunas(3);
