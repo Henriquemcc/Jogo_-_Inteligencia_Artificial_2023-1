@@ -87,3 +87,20 @@ function swap(array, coordenada1, coordenada2) {
     array[coordenada2.coluna][coordenada2.linha] = tmp;
     return array;
 }
+
+/**
+ * Obtém a posição do menor elemento de um array.
+ * @param {Array} array Array a ser obtida a posição do menor elemento.
+ * @returns {Number} Posicão do menor elemento.
+ */
+function obterPosicaoMenorElemento(array) {
+    let menorElemento = array[0];
+    let posicaoMenorElemento = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] < menorElemento) {
+            menorElemento = array[i];
+            posicaoMenorElemento = i;
+        }
+    }
+    return posicaoMenorElemento;
+}
