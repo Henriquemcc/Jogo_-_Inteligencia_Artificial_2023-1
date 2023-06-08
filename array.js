@@ -72,3 +72,18 @@ function obterCoordenadasElementoArrayBidimensional(elemento, array) {
     }
     return null;
 }
+
+/**
+ * Troca dois elementos de posição em um array
+ * @param {Array} array Array que será clonado e o clone terá elementos trocados de posição.
+ * @param {Coordenadas} coordenada1 Coordenada do primeiro elemento.
+ * @param {Coordenadas} coordenada2 Coordenada do segundo elemento.
+ * @returns {Array} Array clonada com os elementos trocados de posição.
+ */
+function swap(array, coordenada1, coordenada2) {
+    array = Array.from(array);
+    let tmp = array[coordenada1.coluna][coordenada1.linha];
+    array[coordenada1.coluna][coordenada1.linha] = array[coordenada2.coluna][coordenada2.linha];
+    array[coordenada2.coluna][coordenada2.linha] = tmp;
+    return array;
+}
