@@ -69,7 +69,7 @@ function tratarCliqueNoBloco(e) {
             window.alert("Bloco inválido");
         }
     }
-    else {
+    else if (modo == 'Nao Iniciado') {
         window.alert("O jogo não foi iniciado. Para iniciar o jogo clique no botão iniciar (representado pelo símbolo play)")
     }
 }
@@ -128,7 +128,7 @@ function novoJogo() {
     }
     catch {}
     timer = new Timer();
-    modo = '';
+    modo = 'Nao Iniciado';
 }
 
 /**

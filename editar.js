@@ -17,6 +17,9 @@ function editarSair() {
     // Reconstruindo grades
     blocosObjetivo.construirGrade();
     blocosJogo.construirGrade();
+
+    // Voltando para o modo não iniciado
+    modo = 'Nao Iniciado';
 }
 
 /**
@@ -43,6 +46,9 @@ function editarCancelar() {
  * Função que é executada quando o botão editar é clicado.
  */
 function editar() {
+
+    // Alterando o modo do jogo
+    modo = 'Edicao';
 
     // Desabilitando os botões padrões
     document.getElementById("btInicio").style.display = 'none';
