@@ -83,16 +83,6 @@ function getTimer() {
 /* --------------------------------------------- */
 
 /**
- * Altera o valor da variável __estado.
- * @param {Array} novoEstado Novo valor para a variável __estado.
- */
-function setEstado(novoEstado) {
-
-    blocosJogo = new Grade(elementoHtml = this.document.getElementById("areaJogo"),funcaoCliqueBloco = tratarCliqueNoBloco,array = novoEstado);
-    blocosJogo.construirGrade();
-}
-
-/**
  * Altera o valor da variável __jogoIniciado.
  * @param {boolean} novoJogoIniciado Novo valor para a variavel __jogoIniciado.
  */
@@ -114,16 +104,6 @@ function setNumeroColunas(novoNumeroColunas) {
  */
 function setNumeroLinhas(novoNumeroLinhas) {
     this.__numeroLinhas = novoNumeroLinhas
-}
-
-/**
- * Altera o valor da variável __objetivo.
- * @param {Array} novoObjetivo Novo valor para a variável __objetivo.
- */
-function setObjetivo(novoObjetivo) {
-
-    blocosObjetivo = new Grade(elementoHtml = this.document.getElementById("areaObjetivo"), funcaoCliqueBloco = null, array = novoObjetivo);
-    blocosObjetivo.construirGrade();
 }
 
 /**
@@ -238,11 +218,24 @@ function obterEstadoAleatorioParaOsBlocos() {
 }
 
 /**
- * Trata o clique no botão novo jogo.
+ * Cria um novo jogo.
  */
 function novoJogo() {
-    setObjetivo(obterEstadoAleatorioParaOsBlocos());
-    setEstado(obterEstadoAleatorioParaOsBlocos());
+
+    // Criando o array do jogo e do objetivo
+    let arrayJogo = obterEstadoAleatorioParaOsBlocos();
+    let arrayObjetivo = arrayJogo;
+    while (arraysSaoIguais(arrayJogo, arrayObjetivo)) {
+        arrayObjetivo = obterEstadoAleatorioParaOsBlocos();
+    }
+
+    // Criando as grades
+    blocosJogo = new Grade(document.getElementById("areaJogo"), tratarCliqueNoBloco, arrayJogo);
+    blocosObjetivo = new Grade(document.getElementById("areaObjetivo"), null, arrayObjetivo);
+    blocosJogo.construirGrade();
+    blocosObjetivo.construirGrade();
+
+    
     setTimer(new Timer());
     setJogoIniciado(false);
 }
@@ -275,13 +268,6 @@ onload = function () {
     setNumeroColunas(3);
     setNumeroLinhas(3);
 
-    // Criando objetivo e estado inicial
-    setObjetivo(obterEstadoAleatorioParaOsBlocos());
-    setEstado(obterEstadoAleatorioParaOsBlocos());
-
-    // Criando o timer
-    setTimer(new Timer());
-
-    // Não-Iniciando o jogo
-    setJogoIniciado(false);
+    // Criando um novo jogo
+    novoJogo();
 }
