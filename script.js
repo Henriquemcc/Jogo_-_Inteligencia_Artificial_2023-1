@@ -45,14 +45,6 @@ let __timer;
 /* --------------------------------------------- */
 
 /**
- * Obtém o valor da variável __estado.
- * @returns {Array} Valor da variável __estado.
- */
-function getEstado() {
-    return blocosJogo.array;
-}
-
-/**
  * Obtém o valor da variável __jogoIniciado.
  * @returns {boolean} Valor da variável __jogoIniciado.
  */
@@ -74,14 +66,6 @@ function getNumeroColunas() {
  */
 function getNumeroLinhas() {
     return this.__numeroLinhas;
-}
-
-/**
- * Obtém o valor da variável __objetivo.
- * @returns {Array} Valor da variável __objetivo.
- */
-function getObjetivo() {
-    return blocosObjetivo.array;
 }
 
 /**
@@ -210,7 +194,7 @@ function tratarCliqueNoBloco(e) {
             swap(blocoSelecionado, blocoVazio);
             
             // Exibindo mensagem de vitória ao jogador
-            if (arraysSaoIguais(getEstado(), getObjetivo())) {
+            if (arraysSaoIguais(blocosJogo.array, blocosObjetivo.array)) {
                 venceuJogo();
             }
         } else {
