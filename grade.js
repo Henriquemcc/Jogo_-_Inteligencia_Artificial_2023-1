@@ -162,6 +162,9 @@ class Grade {
         return new BlocoCompleto(linha, coluna, this.__array[linha][coluna]);
     }
 
+    /**
+     * Habilita o modo de edição nas tags HTML da grade.
+     */
     habilitarModoEdicao() {
         let dados = converterArrayBidimensionalParaUnidimensional(this.__array);
         for (let i = 0; i < this.elementoHtml.childNodes.length; i++) {
@@ -169,11 +172,46 @@ class Grade {
         }
     }
 
-    aplicarEdicao() {
+    /**
+     * Obtém as entradas do usuário no modo de edição.
+     * @returns {Array} Entradas do usuário.
+     */
+    obterEntradasEdiacao() {
         // Obtendo entrada do usuário
         let entradas = [];
         for (let i = 0; i < this.elementoHtml.childNodes.length; i++) {
             entradas.push(this.elementoHtml.childNodes[i].childNodes[0].childNodes[0].value);
+        }
+
+        return entradas;
+    }
+
+    /**
+     * Obtém os elementos inválidos das entradas do usuário no modo de edição.
+     * @returns {Array} Elementos inválidos das entradas do usuário.
+     */
+    entradasInvalidasEdicao() {
+        let entradas = this.obterEntradasEdiacao();
+
+        // Verificando se as entradas são válidas
+        let elementosInvalidos = [];
+        for (let i = 0; i < entradas.length; i++) {
+            if (isNaN(entradas[i]) || entradas[i] < 0 || entradas[i] > 8) {
+                elementosInvalidos.push(entradas[i]);
+            }
+        }
+
+        return elementosInvalidos;
+    }
+
+    /**
+     * Aplica a entrada do usuário no array.
+     */
+    aplicarEdicao() {
+        let entradas = this.obterEntradasEdiacao();
+
+        if (this.entradasInvalidasEdicao().length > 0) {
+            throw "Entrada Inválida";
         }
 
         // Convertendo entrada em um array bidimensional.
@@ -189,5 +227,4 @@ class Grade {
         // Alterando o valor do array
         this.__array = novoArray;
     }
-
 }

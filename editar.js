@@ -27,12 +27,22 @@ function editarSair() {
  */
 function editarConfirmar() {
 
-    // Aplicando a edição
-    blocosObjetivo.aplicarEdicao();
-    blocosJogo.aplicarEdicao();
+    let elementosInvalidosObjetivo = blocosObjetivo.entradasInvalidasEdicao();
+    let elementosInvalidosJogo = blocosJogo.entradasInvalidasEdicao();
 
-    // Saindo do jogo
-    editarSair();
+    if (elementosInvalidosJogo.length > 0) {
+        window.alert(`Entrada(s) Inválida(s) no Jogo: ${elementosInvalidosJogo}`);
+    } else if (elementosInvalidosObjetivo.length > 0) {
+        window.alert(`Entrada(s) Inválida(s) no Objetivo: ${elementosInvalidosObjetivo}`);
+    } else {
+
+        // Aplicando a edição
+        blocosObjetivo.aplicarEdicao();
+        blocosJogo.aplicarEdicao();
+
+        // Saindo do jogo
+        editarSair();
+    }
 }
 
 /**
