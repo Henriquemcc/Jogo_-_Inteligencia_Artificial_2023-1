@@ -160,12 +160,7 @@ function setTimer(novoTimer) {
  * @returns {BlocoCompleto} Bloco contendo os dados do bloco vazio.
  */
 function obterBlocoVazio() {
-    for (let i = 0; i < getNumeroLinhas(); i++) {
-        for (let j = 0; j < getNumeroColunas(); j++) {
-            if (getEstado()[i][j] == 0) { return new BlocoCompleto(linha = i, coluna = j, getEstado()[i][j]); }
-        }
-    }
-    return null;
+    return blocosJogo.obterBlocoVazio();
 }
 
 /**
@@ -175,14 +170,7 @@ function obterBlocoVazio() {
  * @returns {BlocoCompleto} Bloco com os dados do bloco da linha e coluna solicitada.
  */
 function obterBloco(linha, coluna) {
-    if (linha >= getNumeroLinhas()) {
-        throw "Número da linha é inváldo";
-    }
-    if (coluna >= getNumeroColunas()) {
-        throw "Número da coluna é inváldo";
-    }
-
-    return new BlocoCompleto(linha = linha, coluna = coluna, valor = getEstado()[linha][coluna]);
+    return blocosJogo.obterBloco(linha, coluna);
 }
 
 /**
@@ -285,7 +273,6 @@ function executarAEstrela() {}
  */
 function iniciarJogo() {
     getTimer().start();
-    console.log(obterBlocoVazio());
     setJogoIniciado(true);
 }
 

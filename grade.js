@@ -84,4 +84,36 @@ class Grade {
         this.__array[coordenada2.linha][coordenada2.coluna] = tmp;
     }
 
+    /**
+     * Obtém o bloco vazio (com o elemento 0).
+     * @returns {BlocoCompleto} Bloco contendo os dados do bloco vazio.
+     */
+    obterBlocoVazio() {
+        for (let i = 0; i < this.__array.length; i++) {
+            for (let j = 0; j < this.__array[i].length; j++) {
+                if (this.__array[i][j] == 0) {
+                    return new BlocoCompleto(i, j, this.__array[i][j]);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Obtém um bloco a partir do valor de sua linha e coluna.
+     * @param {Number} linha Valor da linha do bloco.
+     * @param {Number} coluna Valor da coluna do bloco.
+     * @returns {BlocoCompleto} Bloco com os dados do bloco da linha e coluna solicitada.
+     */
+    obterBloco(linha, coluna) {
+        if (coluna >= this.__array.length) {
+            throw "Número da coluna é inváldo";
+        }
+        if (linha >= this.__array[coluna].length) {
+            throw "Número da linha é inváldo";
+        }
+
+        return new BlocoCompleto(linha, coluna, this.__array[linha][coluna]);
+    }
+
 }
