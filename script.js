@@ -12,16 +12,16 @@ let blocosObjetivo;
  */
 let blocosJogo;
 
+/**
+ * Modo de execução.
+ */
+let modo;
+
 /* Variáveis globais: Fim */
 
 /* --------------------------------- */
 /* Variáveis globais ocultas: Inicio */
 /* --------------------------------- */
-
-/**
- * Variável que indica se o jogo foi iniciado.
- */
-let __jogoIniciado;
 
 /**
  * Número de colunas que a grade do jogo terá.
@@ -43,14 +43,6 @@ let __timer;
 /* --------------------------------------------- */
 /* Getters das variáveis globais ocultas: Inicio */
 /* --------------------------------------------- */
-
-/**
- * Obtém o valor da variável __jogoIniciado.
- * @returns {boolean} Valor da variável __jogoIniciado.
- */
-function getJogoIniciado() {
-    return this.__jogo_iniciado;
-}
 
 /**
  * Obtém o valor da variável __numeroColunas.
@@ -81,14 +73,6 @@ function getTimer() {
 /* --------------------------------------------- */
 /* Setters das variáveis globais ocultas: Inicio */
 /* --------------------------------------------- */
-
-/**
- * Altera o valor da variável __jogoIniciado.
- * @param {boolean} novoJogoIniciado Novo valor para a variavel __jogoIniciado.
- */
-function setJogoIniciado(novoJogoIniciado) {
-    this.__jogo_iniciado = novoJogoIniciado;
-}
 
 /**
  * Altera o valor da variável __numeroColunas.
@@ -165,7 +149,7 @@ function swap(coordenada1, coordenada2) {
  */
 function tratarCliqueNoBloco(e) {
 
-    if (getJogoIniciado()) {
+    if (modo == 'Jogo') {
         let blocoSelecionado = obterBloco(linha = e.target.getAttribute('i'), coluna = e.target.getAttribute('j'));
         let blocoVazio = obterBlocoVazio();
         if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) == 1) {
@@ -237,7 +221,7 @@ function novoJogo() {
 
     
     setTimer(new Timer());
-    setJogoIniciado(false);
+    modo = '';
 }
 
 /**
@@ -250,7 +234,7 @@ function executarAEstrela() {}
  */
 function iniciarJogo() {
     getTimer().start();
-    setJogoIniciado(true);
+    modo = 'Jogo';
 }
 
 /**
