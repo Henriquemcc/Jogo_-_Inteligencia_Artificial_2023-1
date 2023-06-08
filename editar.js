@@ -11,11 +11,11 @@ function editarSair() {
     // Habilitando os botões padrões
     document.getElementById("btInicio").style.display = '';
     document.getElementById("btAEstrela").style.display = '';
-    document.getElementById("btNovoObjetivo").style.display = '';
+    document.getElementById("btNovoJogo").style.display = '';
     document.getElementById("btEditar").style.display = '';
 
     // Reconstruindo objetivo do jogo
-    setObjetivo(getObjetivo());
+    blocosObjetivo.construirGrade();
 }
 
 /**
@@ -32,16 +32,16 @@ function editarConfirmar() {
 
     // Convertendo entrada em um array de objetivo
     let novoObjetivo = [];
-    for(let i = 0, k = 0; i < getNumeroLinhas() && k < entradas.length; i++) {
+    for(let i = 0, k = 0; i < numeroLinhas && k < entradas.length; i++) {
         let linha = [];
-        for (let j = 0; j < getNumeroColunas() && k < entradas.length; j++, k++) {
+        for (let j = 0; j < numeroColunas && k < entradas.length; j++, k++) {
             linha.push(entradas[k]);
         }
         novoObjetivo.push(linha);
     }
 
     // Alterando o valor do objetivo
-    setObjetivo(novoObjetivo);
+    blocosObjetivo.array = novoObjetivo;
 
     // Saindo do jogo
     editarSair();
@@ -62,7 +62,7 @@ function editar() {
     // Desabilitando os botões padrões
     document.getElementById("btInicio").style.display = 'none';
     document.getElementById("btAEstrela").style.display = 'none';
-    document.getElementById("btNovoObjetivo").style.display = 'none';
+    document.getElementById("btNovoJogo").style.display = 'none';
     document.getElementById("btEditar").style.display = 'none';
 
     // Habilitando os botões confirmar e cancelar
