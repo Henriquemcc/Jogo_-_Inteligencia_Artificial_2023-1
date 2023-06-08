@@ -1,31 +1,66 @@
-/**
- * Objeto que marcará o tempo no jogo
- */
-let __timer;
+/* --------------------------------- */
+/* Variáveis globais ocultas: Inicio */
+/* --------------------------------- */
 
 /**
- * Obtém o valor da variável __timer.
- * @returns {Timer} Valor da variável __timer.
+ * Estado do jogo.
  */
-function getTimer() {
-    return this.__timer;
-}
+let __estado;
 
 /**
- * Altera o valor da variável __timer.
- * @param {Timer} novoTimer Novo valor para a variável __timer.
+ * Variável que indica se o jogo foi iniciado.
  */
-function setTimer(novoTimer) {
-    try {
-        this.__timer.stop();
-    } catch { }
-    this.__timer = novoTimer;
-}
+let __jogoIniciado;
+
+/**
+ * Número de colunas que a grade do jogo terá.
+ */
+let __numeroColunas;
 
 /**
  * Número de linhas que a grade do jogo terá.
  */
 let __numeroLinhas;
+
+/**
+ * Objetivo do jogo.
+ */
+let __objetivo;
+
+/**
+ * Objeto que marcará o tempo no jogo
+ */
+let __timer;
+
+/* Variáveis globais ocultas: Fim */
+
+/* --------------------------------------------- */
+/* Getters das variáveis globais ocultas: Inicio */
+/* --------------------------------------------- */
+
+/**
+ * Obtém o valor da variável __estado.
+ * @returns {Array} Valor da variável __estado.
+ */
+function getEstado() {
+    return __estado;
+}
+
+/**
+ * Obtém o valor da variável __jogoIniciado.
+ * @returns {boolean} Valor da variável __jogoIniciado.
+ */
+function getJogoIniciado() {
+    return this.__jogo_iniciado;
+}
+
+/**
+ * Obtém o valor da variável __numeroColunas.
+ * @returns {Number} Valor da variável __numeroColunas.
+ */
+function getNumeroColunas() {
+    return this.__numeroColunas;
+}
 
 /**
  * Obtém o valor da variável __numeroLinhas.
@@ -36,24 +71,53 @@ function getNumeroLinhas() {
 }
 
 /**
- * Altera o valor da variável __numeroLinhas.
- * @param {Number} novoNumeroLinhas Novo valor para a variável __numeroLinhas.
+ * Obtém o valor da variável __objetivo.
+ * @returns {Array} Valor da variável __objetivo.
  */
-function setNumeroLinhas(novoNumeroLinhas) {
-    this.__numeroLinhas = novoNumeroLinhas
+function getObjetivo() {
+    return __objetivo;
 }
 
 /**
- * Número de colunas que a grade do jogo terá.
+ * Obtém o valor da variável __timer.
+ * @returns {Timer} Valor da variável __timer.
  */
-let __numeroColunas;
+function getTimer() {
+    return this.__timer;
+}
+
+/* Getters das variáveis globais ocultas: Fim */
+
+/* --------------------------------------------- */
+/* Setters das variáveis globais ocultas: Inicio */
+/* --------------------------------------------- */
 
 /**
- * Obtém o valor da variável __numeroColunas.
- * @returns {Number} Valor da variável __numeroColunas.
+ * Altera o valor da variável __estado.
+ * @param {Array} novoEstado Novo valor para a variável __estado.
  */
-function getNumeroColunas() {
-    return this.__numeroColunas;
+function setEstado(novoEstado) {
+    __estado = novoEstado;
+
+    // Construindo a página de acordo com o estado do jogo
+    const tagJogo = this.document.getElementById("areaJogo");
+    tagJogo.innerHTML = "";
+    for (let i = 0; i < __estado.length; i++) {
+        let tamanhoColuna = Math.floor(12 / __estado[i].length);
+        for (let j = 0; j < __estado[i].length; j++) {
+            let valor = (__estado[i][j] == 0) ? '' : __estado[i][j];
+            tagJogo.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
+            tagJogo.onclick = tratarCliqueNoBloco;
+        }
+    }
+}
+
+/**
+ * Altera o valor da variável __jogoIniciado.
+ * @param {boolean} novoJogoIniciado Novo valor para a variavel __jogoIniciado.
+ */
+function setJogoIniciado(novoJogoIniciado) {
+    this.__jogo_iniciado = novoJogoIniciado;
 }
 
 /**
@@ -65,16 +129,11 @@ function setNumeroColunas(novoNumeroColunas) {
 }
 
 /**
- * Objetivo do jogo.
+ * Altera o valor da variável __numeroLinhas.
+ * @param {Number} novoNumeroLinhas Novo valor para a variável __numeroLinhas.
  */
-let __objetivo;
-
-/**
- * Obtém o valor da variável __objetivo.
- * @returns {Array} Valor da variável __objetivo.
- */
-function getObjetivo() {
-    return __objetivo;
+function setNumeroLinhas(novoNumeroLinhas) {
+    this.__numeroLinhas = novoNumeroLinhas
 }
 
 /**
@@ -95,6 +154,19 @@ function setObjetivo(novoObjetivo) {
         }
     }
 }
+
+/**
+ * Altera o valor da variável __timer.
+ * @param {Timer} novoTimer Novo valor para a variável __timer.
+ */
+function setTimer(novoTimer) {
+    try {
+        this.__timer.stop();
+    } catch { }
+    this.__timer = novoTimer;
+}
+
+/* Setters das variáveis globais ocultas: Fim */
 
 /**
  * Obtém o bloco vazio no jogo.
@@ -152,27 +224,6 @@ function swap(coordenada1, coordenada2) {
 }
 
 /**
- * Variável que indica se o jogo foi iniciado.
- */
-let __jogoIniciado;
-
-/**
- * Obtém o valor da variável __jogoIniciado.
- * @returns {boolean} Valor da variável __jogoIniciado.
- */
-function getJogoIniciado() {
-    return this.__jogo_iniciado;
-}
-
-/**
- * Altera o valor da variável __jogoIniciado.
- * @param {boolean} novoJogoIniciado Novo valor para a variavel __jogoIniciado.
- */
-function setJogoIniciado(novoJogoIniciado) {
-    this.__jogo_iniciado = novoJogoIniciado;
-}
-
-/**
  * Função que é executada quando um bloco for clicado.
  * @param {*} e 
  */
@@ -205,39 +256,6 @@ function tratarCliqueNoBloco(e) {
 function venceuJogo() {
     getTimer().stop();
     alert("Parabéns você venceu o jogo")
-}
-
-/**
- * Estado do jogo.
- */
-let __estado;
-
-/**
- * Obtém o valor da variável __estado.
- * @returns {Array} Valor da variável __estado.
- */
-function getEstado() {
-    return __estado;
-}
-
-/**
- * Altera o valor da variável __estado.
- * @param {Array} novoEstado Novo valor para a variável __estado.
- */
-function setEstado(novoEstado) {
-    __estado = novoEstado;
-
-    // Construindo a página de acordo com o estado do jogo
-    const tagJogo = this.document.getElementById("areaJogo");
-    tagJogo.innerHTML = "";
-    for (let i = 0; i < __estado.length; i++) {
-        let tamanhoColuna = Math.floor(12 / __estado[i].length);
-        for (let j = 0; j < __estado[i].length; j++) {
-            let valor = (__estado[i][j] == 0) ? '' : __estado[i][j];
-            tagJogo.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
-            tagJogo.onclick = tratarCliqueNoBloco;
-        }
-    }
 }
 
 /**
@@ -276,9 +294,7 @@ function novoObjetivo() {
 /**
  * Função que é executado quando o botão A* é clicado.
  */
-function executarAEstrela() {
-
-}
+function executarAEstrela() {}
 
 /**
  * Função que é executada quando o botão Jogar é clicado.
