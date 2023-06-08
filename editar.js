@@ -14,8 +14,9 @@ function editarSair() {
     document.getElementById("btNovoJogo").style.display = '';
     document.getElementById("btEditar").style.display = '';
 
-    // Reconstruindo objetivo do jogo
+    // Reconstruindo grades
     blocosObjetivo.construirGrade();
+    blocosJogo.construirGrade();
 }
 
 /**
@@ -23,25 +24,9 @@ function editarSair() {
  */
 function editarConfirmar() {
 
-    // Obtendo entrada do usuário
-    const objetivoJogo = document.getElementById("areaObjetivo");
-    let entradas = [];
-    for (let i = 0; i < objetivoJogo.childNodes.length; i++) {
-        entradas.push(objetivoJogo.childNodes[i].childNodes[0].childNodes[0].value);
-    }
-
-    // Convertendo entrada em um array de objetivo
-    let novoObjetivo = [];
-    for(let i = 0, k = 0; i < numeroLinhas && k < entradas.length; i++) {
-        let linha = [];
-        for (let j = 0; j < numeroColunas && k < entradas.length; j++, k++) {
-            linha.push(entradas[k]);
-        }
-        novoObjetivo.push(linha);
-    }
-
-    // Alterando o valor do objetivo
-    blocosObjetivo.array = novoObjetivo;
+    // Aplicando a edição
+    blocosObjetivo.aplicarEdicao();
+    blocosJogo.aplicarEdicao();
 
     // Saindo do jogo
     editarSair();
@@ -71,11 +56,8 @@ function editar() {
     document.getElementById("btCancelar").style.display = '';
     document.getElementById("btCancelar").onclick = editarCancelar;
 
-    // Alterando os elementos de objetivo para caixa de texto
-    const objetivoJogo = document.getElementById("areaObjetivo");
-    for (let i = 0; objetivoJogo.childNodes.length; i++) {
-        objetivoJogo.childNodes[i].innerHTML = "<div class=\"form-control\"><input class=\"textoObjetivo\" type=\"number\"></div>";
-    }
-
+    // Habilitando modo de edição
+    blocosObjetivo.habilitarModoEdicao();
+    blocosJogo.habilitarModoEdicao();
 
 }

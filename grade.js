@@ -8,10 +8,28 @@ class Grade {
      * @param {Object} elementoHtml Elemento HTML que vai receber os blocos da grade.
      * @param {Function} funcaoCliqueBloco Função que trata o clique no bloco da grade.
      * @param {Array} array Array bidimensional que será utilizado para construir os blocos.
+     * @param {Number} numeroLinhas Número de linhas.
+     * @param {Number} numeroColunas Número de colunas.
      */
-    constructor(elementoHtml = null, funcaoCliqueBloco = null, array = null) {
+    constructor(elementoHtml = null, funcaoCliqueBloco = null, array = null, numeroLinhas = null, numeroColunas = null) {
+
+        if (numeroColunas == null && array != null) {
+            numeroColunas = array.length;
+        }
+
+        if (numeroLinhas == null && array != null) {
+            numeroLinhas = 0;
+            for (let i = 0; i < array.length; i++) {
+                if (array[i] != null) {
+                    numeroLinhas = Math.max(numeroLinhas, array[i].length);
+                }
+            }
+        }
+
         this.__elementoHtml = elementoHtml;
         this.__array = array;
+        this.__numeroColunas = numeroColunas;
+        this.__numeroLinhas = numeroLinhas;
         this.__funcaoCliqueBloco = funcaoCliqueBloco;
     }
 
@@ -38,6 +56,20 @@ class Grade {
     }
 
     /**
+     * Obtém o número de linhas.
+     */
+    get numeroColunas() {
+        return this.__numeroColunas;
+    }
+
+    /**
+     * Obtém o número de colunas.
+     */
+    get numeroLinhas() {
+        return this.__numeroLinhas;
+    }
+
+    /**
      * Altera o valor do atributo array.
      */
     set array(array) {
@@ -56,6 +88,20 @@ class Grade {
      */
     set funcaoCliqueBloco(funcaoCliqueBloco) {
         this.__funcaoCliqueBloco = funcaoCliqueBloco;
+    }
+
+    /**
+     * Altera o número de linhas.
+     */
+    set numeroColunas(numeroColunas) {
+        this.__numeroColunas = numeroColunas;
+    }
+
+    /**
+     * Altera o número de colunas.
+     */
+    set numeroLinhas(numeroLinhas) {
+        this.__numeroLinhas = numeroLinhas;
     }
 
     /**
@@ -114,6 +160,33 @@ class Grade {
         }
 
         return new BlocoCompleto(linha, coluna, this.__array[linha][coluna]);
+    }
+
+    habilitarModoEdicao() {
+        for (let i = 0; i < this.elementoHtml.childNodes.length; i++) {
+            this.elementoHtml.childNodes[i].innerHTML = "<div class=\"form-control\"><input class=\"textoObjetivo\" type=\"number\"></div>";
+        }
+    }
+
+    aplicarEdicao() {
+        // Obtendo entrada do usuário
+        let entradas = [];
+        for (let i = 0; i < this.elementoHtml.childNodes.length; i++) {
+            entradas.push(this.elementoHtml.childNodes[i].childNodes[0].childNodes[0].value);
+        }
+
+        // Convertendo entrada em um array bidimensional.
+        let novoArray = [];
+        for (let i = 0, k = 0; i < this.__numeroLinhas && k < entradas.length; i++) {
+            let linha = [];
+            for (let j = 0; j < this.__numeroColunas && k < entradas.length; j++, k++) {
+                linha.push(entradas[k]);
+            }
+            novoArray.push(linha);
+        }
+
+        // Alterando o valor do array
+        this.__array = novoArray;
     }
 
 }
