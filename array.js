@@ -55,3 +55,20 @@ function embaralharArray(array) {
     }
     return array;
 }
+
+/**
+ * Obtém as coordenadas de um elemento em um array bidimensional.
+ * @param {*} elemento Elemento a ser procurado.
+ * @param {Array} array Array bidimensional em que o elemento será procurado.
+ * @returns {Coordenadas} Coordenadas do elemento procurado.
+ */
+function obterCoordenadasElementoArrayBidimensional(elemento, array) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].length; j++) {
+            if (array[i][j] == elemento) {
+                return new Coordenadas(i, j);
+            }
+        }
+    }
+    return null;
+}
