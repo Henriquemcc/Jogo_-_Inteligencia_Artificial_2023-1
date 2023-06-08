@@ -1,11 +1,22 @@
+/* ------------------------- */
+/* Variáveis globais: Inicio */
+/* ------------------------- */
+
+/**
+ * Área dos blocos do Objetivo
+ */
+let blocosObjetivo;
+
+/**
+ * Área dos blocos do Jogo.
+ */
+let blocosJogo;
+
+/* Variáveis globais: Fim */
+
 /* --------------------------------- */
 /* Variáveis globais ocultas: Inicio */
 /* --------------------------------- */
-
-/**
- * Estado do jogo.
- */
-let __estado;
 
 /**
  * Variável que indica se o jogo foi iniciado.
@@ -23,11 +34,6 @@ let __numeroColunas;
 let __numeroLinhas;
 
 /**
- * Objetivo do jogo.
- */
-let __objetivo;
-
-/**
  * Objeto que marcará o tempo no jogo
  */
 let __timer;
@@ -43,7 +49,7 @@ let __timer;
  * @returns {Array} Valor da variável __estado.
  */
 function getEstado() {
-    return __estado;
+    return blocosJogo.array;
 }
 
 /**
@@ -75,7 +81,7 @@ function getNumeroLinhas() {
  * @returns {Array} Valor da variável __objetivo.
  */
 function getObjetivo() {
-    return __objetivo;
+    return blocosObjetivo.array;
 }
 
 /**
@@ -97,19 +103,9 @@ function getTimer() {
  * @param {Array} novoEstado Novo valor para a variável __estado.
  */
 function setEstado(novoEstado) {
-    __estado = novoEstado;
 
-    // Construindo a página de acordo com o estado do jogo
-    const tagJogo = this.document.getElementById("areaJogo");
-    tagJogo.innerHTML = "";
-    for (let i = 0; i < __estado.length; i++) {
-        let tamanhoColuna = Math.floor(12 / __estado[i].length);
-        for (let j = 0; j < __estado[i].length; j++) {
-            let valor = (__estado[i][j] == 0) ? '' : __estado[i][j];
-            tagJogo.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
-            tagJogo.onclick = tratarCliqueNoBloco;
-        }
-    }
+    blocosJogo = new Grade(elementoHtml = this.document.getElementById("areaJogo"),funcaoCliqueBloco = tratarCliqueNoBloco,array = novoEstado);
+    blocosJogo.construirGrade();
 }
 
 /**
@@ -141,18 +137,9 @@ function setNumeroLinhas(novoNumeroLinhas) {
  * @param {Array} novoObjetivo Novo valor para a variável __objetivo.
  */
 function setObjetivo(novoObjetivo) {
-    __objetivo = novoObjetivo;
 
-    // Construindo página de acordo com o objetivo do jogo
-    const tagObjetivo = this.document.getElementById("areaObjetivo");
-    tagObjetivo.innerHTML = "";
-    for (let i = 0; i < __objetivo.length; i++) {
-        let tamanhoColuna = Math.floor(12 / __objetivo[i].length);
-        for (let j = 0; j < __objetivo[i].length; j++) {
-            let valor = (__objetivo[i][j] == 0) ? '' : __objetivo[i][j];
-            tagObjetivo.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
-        }
-    }
+    blocosObjetivo = new Grade(elementoHtml = this.document.getElementById("areaObjetivo"), funcaoCliqueBloco = null, array = novoObjetivo);
+    blocosObjetivo.construirGrade();
 }
 
 /**
