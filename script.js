@@ -203,11 +203,8 @@ function calcularDistanciaDoisBlocos(bloco1, bloco2) {
  * @param {Coordenadas} coordenada2 Coordenada do segundo bloco.
  */
 function swap(coordenada1, coordenada2) {
-    let estado = getEstado();
-    let tmp = estado[coordenada1.linha][coordenada1.coluna];
-    estado[coordenada1.linha][coordenada1.coluna] = estado[coordenada2.linha][coordenada2.coluna];
-    estado[coordenada2.linha][coordenada2.coluna] = tmp;
-    setEstado(estado);
+    blocosJogo.swap(coordenada1, coordenada2);
+    blocosJogo.construirGrade();
 }
 
 /**

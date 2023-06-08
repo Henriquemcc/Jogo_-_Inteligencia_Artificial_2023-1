@@ -73,4 +73,15 @@ class Grade {
         }
     }
 
+    /**
+     * Troca de posição dois blocos do jogo.
+     * @param {Coordenadas} coordenada1 Coordenada do primeiro bloco.
+     * @param {Coordenadas} coordenada2 Coordenada do segundo bloco.
+     */
+    swap(coordenada1, coordenada2) {
+        let tmp = this.__array[coordenada1.linha][coordenada1.coluna];
+        this.__array[coordenada1.linha][coordenada1.coluna] = this.__array[coordenada2.linha][coordenada2.coluna];
+        this.__array[coordenada2.linha][coordenada2.coluna] = tmp;
+    }
+
 }
