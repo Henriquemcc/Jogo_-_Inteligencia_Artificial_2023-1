@@ -28,6 +28,21 @@ function arraysSaoIguais(array1, array2) {
 }
 
 /**
+ * Converte um array bidimensional em um array unidimensional.
+ * @param {Array} arrayBidimensional Array bidimensional que será convertido para um array unidimensional.
+ * @returns Array unidimensional com todos os elementos do array bidimensional.
+ */
+function converterArrayBidimensionalParaUnidimensional(arrayBidimensional) {
+    let arrayUnidimensional = [];
+    for (let i = 0; i < arrayBidimensional.length; i++) {
+        for (let j = 0; j < arrayBidimensional[i].length; j++) {
+            arrayUnidimensional.push(arrayBidimensional[i][j]);
+        }
+    }
+    return arrayUnidimensional;
+}
+
+/**
  * Embaralha os elementos de um array.
  * @param {Array} array Array cuja cópia será embaralhada.
  * @returns Array cópia do array de entrada embaralhado.
