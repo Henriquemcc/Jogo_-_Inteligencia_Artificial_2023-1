@@ -17,109 +17,22 @@ let blocosJogo;
  */
 let modo;
 
-/* Variáveis globais: Fim */
-
-/* --------------------------------- */
-/* Variáveis globais ocultas: Inicio */
-/* --------------------------------- */
-
 /**
  * Número de colunas que a grade do jogo terá.
  */
-let __numeroColunas;
+let numeroColunas;
 
 /**
  * Número de linhas que a grade do jogo terá.
  */
-let __numeroLinhas;
+let numeroLinhas;
 
 /**
  * Objeto que marcará o tempo no jogo
  */
-let __timer;
+let timer;
 
-/* Variáveis globais ocultas: Fim */
-
-/* --------------------------------------------- */
-/* Getters das variáveis globais ocultas: Inicio */
-/* --------------------------------------------- */
-
-/**
- * Obtém o valor da variável __numeroColunas.
- * @returns {Number} Valor da variável __numeroColunas.
- */
-function getNumeroColunas() {
-    return this.__numeroColunas;
-}
-
-/**
- * Obtém o valor da variável __numeroLinhas.
- * @returns {Number} Valor da variável __numeroLinhas.
- */
-function getNumeroLinhas() {
-    return this.__numeroLinhas;
-}
-
-/**
- * Obtém o valor da variável __timer.
- * @returns {Timer} Valor da variável __timer.
- */
-function getTimer() {
-    return this.__timer;
-}
-
-/* Getters das variáveis globais ocultas: Fim */
-
-/* --------------------------------------------- */
-/* Setters das variáveis globais ocultas: Inicio */
-/* --------------------------------------------- */
-
-/**
- * Altera o valor da variável __numeroColunas.
- * @param {Number} novoNumeroColunas Novo valor para a variável __numeroColunas.
- */
-function setNumeroColunas(novoNumeroColunas) {
-    this.__numeroColunas = novoNumeroColunas;
-}
-
-/**
- * Altera o valor da variável __numeroLinhas.
- * @param {Number} novoNumeroLinhas Novo valor para a variável __numeroLinhas.
- */
-function setNumeroLinhas(novoNumeroLinhas) {
-    this.__numeroLinhas = novoNumeroLinhas
-}
-
-/**
- * Altera o valor da variável __timer.
- * @param {Timer} novoTimer Novo valor para a variável __timer.
- */
-function setTimer(novoTimer) {
-    try {
-        this.__timer.stop();
-    } catch { }
-    this.__timer = novoTimer;
-}
-
-/* Setters das variáveis globais ocultas: Fim */
-
-/**
- * Obtém o bloco vazio no jogo.
- * @returns {BlocoCompleto} Bloco contendo os dados do bloco vazio.
- */
-function obterBlocoVazio() {
-    return blocosJogo.obterBlocoVazio();
-}
-
-/**
- * Obtém um bloco a partir do valor de sua linha e coluna.
- * @param {Number} linha Valor da linha do bloco.
- * @param {Number} coluna Valor da coluna do bloco.
- * @returns {BlocoCompleto} Bloco com os dados do bloco da linha e coluna solicitada.
- */
-function obterBloco(linha, coluna) {
-    return blocosJogo.obterBloco(linha, coluna);
-}
+/* Variáveis globais: Fim */
 
 /**
  * Obtém a distância entre dois blocos do jogo.
@@ -134,28 +47,19 @@ function calcularDistanciaDoisBlocos(bloco1, bloco2) {
 }
 
 /**
- * Troca de posição dois blocos do jogo.
- * @param {Coordenadas} coordenada1 Coordenada do primeiro bloco.
- * @param {Coordenadas} coordenada2 Coordenada do segundo bloco.
- */
-function swap(coordenada1, coordenada2) {
-    blocosJogo.swap(coordenada1, coordenada2);
-    blocosJogo.construirGrade();
-}
-
-/**
  * Função que é executada quando um bloco for clicado.
  * @param {*} e 
  */
 function tratarCliqueNoBloco(e) {
 
     if (modo == 'Jogo') {
-        let blocoSelecionado = obterBloco(linha = e.target.getAttribute('i'), coluna = e.target.getAttribute('j'));
-        let blocoVazio = obterBlocoVazio();
+        let blocoSelecionado = blocosJogo.obterBloco(e.target.getAttribute('i'), e.target.getAttribute('j'));
+        let blocoVazio = blocosJogo.obterBlocoVazio();
         if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) == 1) {
 
             // Alterando posição dos blocos
-            swap(blocoSelecionado, blocoVazio);
+            blocosJogo.swap(blocoSelecionado, blocoVazio)
+            blocosJogo.construirGrade();
             
             // Exibindo mensagem de vitória ao jogador
             if (arraysSaoIguais(blocosJogo.array, blocosObjetivo.array)) {
@@ -174,7 +78,7 @@ function tratarCliqueNoBloco(e) {
  * Função que é executada quando o jogador vencer o jogo.
  */
 function venceuJogo() {
-    getTimer().stop();
+    timer.stop();
     alert("Parabéns você venceu o jogo")
 }
 
@@ -190,9 +94,9 @@ function obterEstadoAleatorioParaOsBlocos() {
 
     // Colocando os numeros aleatórios nas posições da grade
     let estado = [];
-    for (let i = 0, k = 0; i < getNumeroLinhas() && k < numerosAleatorios.length; i++) {
+    for (let i = 0, k = 0; i < numeroLinhas && k < numerosAleatorios.length; i++) {
         let linha = [];
-        for (let j = 0; j < getNumeroColunas() && k < numerosAleatorios.length; j++, k++) {
+        for (let j = 0; j < numeroColunas && k < numerosAleatorios.length; j++, k++) {
             linha.push(numerosAleatorios[k]);
         }
         estado.push(linha);
@@ -219,8 +123,11 @@ function novoJogo() {
     blocosJogo.construirGrade();
     blocosObjetivo.construirGrade();
 
-    
-    setTimer(new Timer());
+    try {
+        timer.stop();
+    }
+    catch {}
+    timer = new Timer();
     modo = '';
 }
 
@@ -233,7 +140,7 @@ function executarAEstrela() {}
  * Função que é executada quando o botão Jogar é clicado.
  */
 function iniciarJogo() {
-    getTimer().start();
+    timer.start();
     modo = 'Jogo';
 }
 
@@ -249,8 +156,8 @@ onload = function () {
     this.document.getElementById("btEditar").onclick = editar;
 
     // Configurando o jogo
-    setNumeroColunas(3);
-    setNumeroLinhas(3);
+    numeroColunas = 3;
+    numeroLinhas = 3;
 
     // Criando um novo jogo
     novoJogo();
