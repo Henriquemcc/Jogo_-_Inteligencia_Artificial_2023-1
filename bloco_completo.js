@@ -9,7 +9,7 @@ class BlocoCompleto {
      * @param {Number} coluna Coluna em que o bloco está
      * @param {*} Valor do bloco.
      */
-    constructor(linha = null, coluna = null, valor = null) {
+    constructor(coluna = null, linha = null, valor = null) {
         this.__linha = linha;
         this.__coluna = coluna;
         this.__valor = valor;

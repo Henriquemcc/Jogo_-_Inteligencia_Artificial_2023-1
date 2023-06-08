@@ -151,7 +151,7 @@ class Grade {
      * @param {Number} coluna Valor da coluna do bloco.
      * @returns {BlocoCompleto} Bloco com os dados do bloco da linha e coluna solicitada.
      */
-    obterBloco(linha, coluna) {
+    obterBloco(coluna, linha) {
         if (coluna >= this.__array.length) {
             throw "Número da coluna é inváldo";
         }
@@ -159,7 +159,7 @@ class Grade {
             throw "Número da linha é inváldo";
         }
 
-        return new BlocoCompleto(linha, coluna, this.__array[linha][coluna]);
+        return new BlocoCompleto(coluna, linha, this.__array[coluna][linha]);
     }
 
     /**
