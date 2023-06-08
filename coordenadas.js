@@ -8,7 +8,7 @@ class Coordenadas {
      * @param {Number} linha Linha em que o bloco está.
      * @param {Number} coluna Coluna em que o bloco está
      */
-    constructor(linha = null, coluna = null) {
+    constructor(coluna = null, linha = null) {
         this.__linha = linha;
         this.__coluna = coluna;
     }

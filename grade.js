@@ -125,9 +125,9 @@ class Grade {
      * @param {Coordenadas} coordenada2 Coordenada do segundo bloco.
      */
     swap(coordenada1, coordenada2) {
-        let tmp = this.__array[coordenada1.linha][coordenada1.coluna];
-        this.__array[coordenada1.linha][coordenada1.coluna] = this.__array[coordenada2.linha][coordenada2.coluna];
-        this.__array[coordenada2.linha][coordenada2.coluna] = tmp;
+        let tmp = this.__array[coordenada1.coluna][coordenada1.linha];
+        this.__array[coordenada1.coluna][coordenada1.linha] = this.__array[coordenada2.coluna][coordenada2.linha];
+        this.__array[coordenada2.coluna][coordenada2.linha] = tmp;
     }
 
     /**
