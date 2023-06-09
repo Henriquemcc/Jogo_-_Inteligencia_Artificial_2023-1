@@ -23,7 +23,7 @@ function editarSair() {
 }
 
 /**
- * Função que é executada quando o botão confirmar, dentro da edição, é clicado.
+ * Função executada quando o botão confirmar, dentro da edição, é clicado.
  */
 function editarConfirmar() {
 
@@ -46,19 +46,22 @@ function editarConfirmar() {
 }
 
 /**
- * Função que é executada quando o botão cancelar, dentro da ediçãoo, é clicado.
+ * Função executada quando o botão cancelar, dentro da ediçãoo, é clicado.
  */
 function editarCancelar() {
     editarSair();
 }
 
 /**
- * Função que é executada quando o botão editar é clicado.
+ * Função executada quando o botão editar é clicado.
  */
 function editar() {
 
     // Alterando o modo do jogo
     modo = 'Edicao';
+
+    // Parando o temporizador
+    timer.stop();
 
     // Desabilitando os botões padrões
     document.getElementById("btInicio").style.display = 'none';
