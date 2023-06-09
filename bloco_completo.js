@@ -7,7 +7,7 @@ class BlocoCompleto {
      * Constrói uma nova instância da classe Bloco.
      * @param {Number} linha Linha em que o bloco está.
      * @param {Number} coluna Coluna em que o bloco está
-     * @param {*} Valor do bloco.
+     * @param {*} valor do bloco.
      */
     constructor(coluna = null, linha = null, valor = null) {
         this.__linha = linha;
