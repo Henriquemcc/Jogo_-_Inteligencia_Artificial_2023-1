@@ -121,8 +121,8 @@ class Grade {
 
     /**
      * Troca de posição dois blocos do jogo.
-     * @param {Coordenadas} coordenada1 Coordenada do primeiro bloco.
-     * @param {Coordenadas} coordenada2 Coordenada do segundo bloco.
+     * @param {Coordenada} coordenada1 Coordenada do primeiro bloco.
+     * @param {Coordenada} coordenada2 Coordenada do segundo bloco.
      */
     swap(coordenada1, coordenada2) {
         let tmp = this.__array[coordenada1.coluna][coordenada1.linha];

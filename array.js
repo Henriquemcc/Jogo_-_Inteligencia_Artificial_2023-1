@@ -60,13 +60,13 @@ function embaralharArray(array) {
  * Obtém as coordenadas de um elemento em um array bidimensional.
  * @param {*} elemento Elemento a ser procurado.
  * @param {Array} array Array bidimensional em que o elemento será procurado.
- * @returns {Coordenadas} Coordenadas do elemento procurado.
+ * @returns {Coordenada} Coordenadas do elemento procurado.
  */
 function obterCoordenadasElementoArrayBidimensional(elemento, array) {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array[i].length; j++) {
             if (array[i][j] === elemento) {
-                return new Coordenadas(i, j);
+                return new Coordenada(i, j);
             }
         }
     }
@@ -76,8 +76,8 @@ function obterCoordenadasElementoArrayBidimensional(elemento, array) {
 /**
  * Troca dois elementos de posição em um array
  * @param {Array} array Array que será clonado e o clone terá elementos trocados de posição.
- * @param {Coordenadas} coordenada1 Coordenada do primeiro elemento.
- * @param {Coordenadas} coordenada2 Coordenada do segundo elemento.
+ * @param {Coordenada} coordenada1 Coordenada do primeiro elemento.
+ * @param {Coordenada} coordenada2 Coordenada do segundo elemento.
  * @returns {Array} Array clonada com os elementos trocados de posição.
  */
 function swap(array, coordenada1, coordenada2) {

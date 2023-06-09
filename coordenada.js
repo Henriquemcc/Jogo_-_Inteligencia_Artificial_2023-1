@@ -1,7 +1,7 @@
 /**
  * Representa uma coordenada do jogo puzzle-8.
  */
-class Coordenadas {
+class Coordenada {
 
     /**
      * Constrói uma nova instância da classe Coordeadas.
