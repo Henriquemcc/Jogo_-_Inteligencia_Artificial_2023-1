@@ -47,15 +47,15 @@ function calcularDistanciaDoisBlocos(bloco1, bloco2) {
 }
 
 /**
- * Função que é executada quando um bloco for clicado.
+ * Função executada quando um bloco for clicado.
  * @param {*} e 
  */
 function tratarCliqueNoBloco(e) {
 
-    if (modo == 'Jogo') {
-        let blocoSelecionado = blocosJogo.obterBloco(e.target.getAttribute('i'), e.target.getAttribute('j'));
+    if (modo === 'Jogo') {
+        let blocoSelecionado = blocosJogo.obterBloco(parseInt(e.target.getAttribute('i')), parseInt(e.target.getAttribute('j')));
         let blocoVazio = blocosJogo.obterBlocoVazio();
-        if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) == 1) {
+        if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) === 1) {
 
             // Alterando posição dos blocos
             blocosJogo.swap(blocoSelecionado, blocoVazio)
@@ -69,13 +69,13 @@ function tratarCliqueNoBloco(e) {
             window.alert("Bloco inválido");
         }
     }
-    else if (modo == 'Nao Iniciado') {
+    else if (modo === 'Nao Iniciado') {
         window.alert("O jogo não foi iniciado. Para iniciar o jogo clique no botão iniciar (representado pelo símbolo play)")
     }
 }
 
 /**
- * Função que é executada quando o jogador vencer o jogo.
+ * Função executada quando o jogador vencer o jogo.
  */
 function venceuJogo() {
     timer.stop();
@@ -92,7 +92,7 @@ function obterEstadoAleatorioParaOsBlocos() {
     let numerosAleatorios = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     numerosAleatorios = embaralharArray(numerosAleatorios);
 
-    // Colocando os numeros aleatórios nas posições da grade
+    // Colocando os números aleatórios nas posições da grade
     let estado = [];
     for (let i = 0, k = 0; i < numeroLinhas && k < numerosAleatorios.length; i++) {
         let linha = [];
@@ -137,7 +137,7 @@ function novoJogo() {
 function executarAEstrela() {}
 
 /**
- * Função que é executada quando o botão Jogar é clicado.
+ * Função executada quando o botão Jogar é clicado.
  */
 function iniciarJogo() {
     timer.start();
@@ -150,15 +150,15 @@ function iniciarJogo() {
 onload = function () {
 
     // Associando os botões com as funções
-    this.document.getElementById("btInicio").onclick = iniciarJogo;
-    this.document.getElementById("btAEstrela").onclick = executarAEstrela;
-    this.document.getElementById("btNovoJogo").onclick = novoJogo;
-    this.document.getElementById("btEditar").onclick = editar;
+    document.getElementById("btInicio").onclick = iniciarJogo;
+    document.getElementById("btAEstrela").onclick = executarAEstrela;
+    document.getElementById("btNovoJogo").onclick = novoJogo;
+    document.getElementById("btEditar").onclick = editar;
 
     // Configurando o jogo
     numeroColunas = 3;
     numeroLinhas = 3;
 
-    // Criando um novo jogo
+    // Criando o jogo
     novoJogo();
 }
