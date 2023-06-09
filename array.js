@@ -65,7 +65,7 @@ function embaralharArray(array) {
 function obterCoordenadasElementoArrayBidimensional(elemento, array) {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array[i].length; j++) {
-            if (array[i][j] == elemento) {
+            if (array[i][j] === elemento) {
                 return new Coordenadas(i, j);
             }
         }
