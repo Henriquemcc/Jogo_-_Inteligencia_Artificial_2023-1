@@ -81,7 +81,7 @@ function obterCoordenadasElementoArrayBidimensional(elemento, array) {
  * @returns {Array} Array clonada com os elementos trocados de posição.
  */
 function swap(array, coordenada1, coordenada2) {
-    array = Array.from(array);
+    array = clonarArrayMultidimensional(array);
     let tmp = array[coordenada1.coluna][coordenada1.linha];
     array[coordenada1.coluna][coordenada1.linha] = array[coordenada2.coluna][coordenada2.linha];
     array[coordenada2.coluna][coordenada2.linha] = tmp;
@@ -103,4 +103,21 @@ function obterPosicaoMenorElemento(array) {
         }
     }
     return posicaoMenorElemento;
+}
+
+/**
+ * Clona um array multidimensional.
+ * @param array Array multidimensional a ser clonado.
+ * @returns {Array} Array multidimensional clonado.
+ */
+function clonarArrayMultidimensional(array) {
+    let clone = [];
+    for (let i = 0; i < array.length; i++) {
+        if (Array.isArray(array[i])) {
+            clone.push(clonarArrayMultidimensional(array[i]));
+        } else {
+            clone.push(array[i]);
+        }
+    }
+    return clone;
 }
