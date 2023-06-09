@@ -4,40 +4,12 @@
 class Coordenada {
 
     /**
-     * Constrói uma nova instância da classe Coordeadas.
+     * Constrói uma nova instância da classe Coordeada.
      * @param {Number} linha Linha em que o bloco está.
      * @param {Number} coluna Coluna em que o bloco está
      */
     constructor(coluna = null, linha = null) {
-        this.__linha = linha;
-        this.__coluna = coluna;
-    }
-
-    /**
-     * Obtém o valor da linha do bloco.
-     */
-    get linha() {
-        return this.__linha;
-    }
-
-    /***
-     * Altera o valor da linha do bloco.
-     */
-    set linha(novaLinha) {
-        this.__linha = novaLinha;
-    }
-
-    /**
-     * Obtém o valor da coluna do bloco.
-     */
-    get coluna() {
-        return this.__coluna;
-    }
-
-    /**
-     * Altera o valor da coluna do bloco.
-     */
-    set coluna(novaColuna) {
-        this.__coluna = novaColuna;
+        this.linha = linha;
+        this.coluna = coluna;
     }
 }
