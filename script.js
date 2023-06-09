@@ -53,7 +53,10 @@ function calcularDistanciaDoisBlocos(bloco1, bloco2) {
 function tratarCliqueNoBloco(e) {
 
     if (modo === 'Jogo') {
-        let blocoSelecionado = blocosJogo.obterBloco(parseInt(e.target.getAttribute('i')), parseInt(e.target.getAttribute('j')));
+        let idBlocoSelecionado = e.target.id;
+        let i = parseInt(idBlocoSelecionado.substring(idBlocoSelecionado.indexOf('_') + 1, idBlocoSelecionado.lastIndexOf('_')));
+        let j = parseInt(idBlocoSelecionado.substring(idBlocoSelecionado.lastIndexOf('_') + 1, idBlocoSelecionado.length));
+        let blocoSelecionado = blocosJogo.obterBloco(i, j);
         let blocoVazio = blocosJogo.obterBlocoVazio();
         if (calcularDistanciaDoisBlocos(blocoSelecionado, blocoVazio) === 1) {
 

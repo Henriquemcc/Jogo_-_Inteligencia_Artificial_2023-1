@@ -112,8 +112,8 @@ class Grade {
         for (let i = 0; i < this.__array.length; i++) {
             let tamanhoColuna = Math.floor(12 / this.__array[i].length);
             for (let j = 0; j < this.__array[i].length; j++) {
-                let valor = (this.__array[i][j] == 0) ? '' : this.__array[i][j];
-                this.__elementoHtml.innerHTML += `<div class="col-${tamanhoColuna} bloco" i="${i}" j="${j}">${valor}</div>`;
+                let valor = (this.__array[i][j] === 0) ? '' : this.__array[i][j];
+                this.__elementoHtml.innerHTML += `<div class="col-${tamanhoColuna} bloco" id="${this.__elementoHtml.id}_${i}_${j}">${valor}</div>`;
                 this.__elementoHtml.onclick = this.funcaoCliqueBloco;
             }
         }
