@@ -137,7 +137,7 @@ class Grade {
     obterBlocoVazio() {
         for (let i = 0; i < this.__array.length; i++) {
             for (let j = 0; j < this.__array[i].length; j++) {
-                if (this.__array[i][j] == 0) {
+                if (this.__array[i][j] === 0) {
                     return new BlocoCompleto(i, j, this.__array[i][j]);
                 }
             }
@@ -219,7 +219,7 @@ class Grade {
         for (let i = 0, k = 0; i < this.__numeroLinhas && k < entradas.length; i++) {
             let linha = [];
             for (let j = 0; j < this.__numeroColunas && k < entradas.length; j++, k++) {
-                linha.push(entradas[k]);
+                linha.push(parseInt(entradas[k]));
             }
             novoArray.push(linha);
         }
