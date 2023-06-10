@@ -114,7 +114,7 @@ function obterEstadoAleatorioParaOsBlocos() {
 }
 
 /**
- * Cria um novo jogo.
+ * Função que é executado quando o botão Novo Jogo é clicado.
  */
 function novoJogo() {
 
@@ -125,18 +125,7 @@ function novoJogo() {
         arrayObjetivo = obterEstadoAleatorioParaOsBlocos();
     }
 
-    // Criando as grades
-    blocosJogo = new Grade(document.getElementById("areaJogo"), tratarCliqueNoBloco, arrayJogo);
-    blocosObjetivo = new Grade(document.getElementById("areaObjetivo"), null, arrayObjetivo);
-    blocosJogo.construirGrade();
-    blocosObjetivo.construirGrade();
-
-    try {
-        timer.stop();
-    } catch {
-    }
-    timer = new Timer();
-    modo = 'Nao Iniciado';
+    criarJogo(arrayJogo, arrayObjetivo)
 }
 
 /**
@@ -209,6 +198,31 @@ function iniciarJogo() {
 }
 
 /**
+ * Cria um jogo 8-Puzzle.
+ * @param arrayJogo {Array} Array com o estado inicial dos blocos do jogo.
+ * @param arrayObjetivo {Array} Array com o estado dos blocos do objetivo.
+ */
+function criarJogo(arrayJogo, arrayObjetivo) {
+
+    // Configurando o jogo
+    numeroColunas = 3;
+    numeroLinhas = 3;
+
+    // Criando os blocos
+    blocosJogo = new Grade(document.getElementById("areaJogo"), tratarCliqueNoBloco, arrayJogo);
+    blocosObjetivo = new Grade(document.getElementById("areaObjetivo"), null, arrayObjetivo);
+    blocosJogo.construirGrade();
+    blocosObjetivo.construirGrade();
+
+    try {
+        timer.stop();
+    } catch {
+    }
+    timer = new Timer();
+    modo = 'Nao Iniciado';
+}
+
+/**
  * Função principal.
  */
 onload = function () {
@@ -219,10 +233,8 @@ onload = function () {
     document.getElementById("btNovoJogo").onclick = novoJogo;
     document.getElementById("btEditar").onclick = editar;
 
-    // Configurando o jogo
-    numeroColunas = 3;
-    numeroLinhas = 3;
-
     // Criando o jogo
-    novoJogo();
+    const arrayJogo = [[1,2,3],[4,5,6],[7,8,0]];
+    const arrayObjetivo = [[1,2,3],[8,0,4],[7,6,5]];
+    criarJogo(arrayJogo, arrayObjetivo);
 }
