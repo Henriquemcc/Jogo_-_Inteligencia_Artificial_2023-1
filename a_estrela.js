@@ -1,3 +1,7 @@
+/**
+ * Enum com os tipos de movimentos que podem ser realizados no 8-Puzzle
+ * @type {{BAIXO: string, ESQUERDA: string, DIREITA: string, CIMA: string}}
+ */
 const Movimento = {
     CIMA: "Cima",
     BAIXO: "Baixo",
