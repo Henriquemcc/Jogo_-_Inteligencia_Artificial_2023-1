@@ -57,19 +57,36 @@ function embaralharArray(array) {
 }
 
 /**
- * Obtém as coordenadas de um elemento em um array bidimensional.
- * @param {*} elemento Elemento a ser procurado.
- * @param {Array} array Array bidimensional em que o elemento será procurado.
- * @returns {Coordenada} Coordenadas do elemento procurado.
+ * Obtém a posição de um elemento procurado de um array multidimensional.
+ * @param elementoProcurado Elemento a ser procurado.
+ * @param array {Array} Array multidimensional onde será feita a busca.
+ * @returns Índices do elemento procurado.
  */
-function obterCoordenadasElementoArrayBidimensional(elemento, array) {
+function obterPosicaoElementoArrayMultidimensional(elementoProcurado, array) {
+
     for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-            if (array[i][j] === elemento) {
-                return new Coordenada(i, j);
+
+        // Caso o elemento atual seja o elemento procurado
+        if (array[i] === elementoProcurado) {
+            return i;
+        }
+
+        // Caso o elemento atual seja um array
+        else if (Array.isArray(array[i])) {
+            let posicaoArrayInterno = obterPosicaoElementoArrayMultidimensional(elementoProcurado, array[i]);
+            if (posicaoArrayInterno != null) {
+
+                // Convertendo para array
+                if (!Array.isArray(posicaoArrayInterno)) {
+                    posicaoArrayInterno = [posicaoArrayInterno];
+                }
+
+                return [i].concat(posicaoArrayInterno);
             }
         }
     }
+
+    // Caso o elemento procurado não tenha sido encontrado
     return null;
 }
 
