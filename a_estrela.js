@@ -92,7 +92,7 @@ class VerticeAEstrela {
  * Executa o método de busca A Estrela.
  * @param estadoInicial {Array} Estado dos blocos que originará a busca.
  * @param estadoFinal {Array} Estado dos blocos que será buscado.
- * @returns {null|*[]} Caminho a ser percorrido
+ * @returns {VerticeAEstrela} Vértice final cujos pais, avôs, bisavôs, ... são os caminhos a serem percorridos.
  */
 function aEstrela(estadoInicial, estadoFinal) {
     const fila = [];
@@ -107,7 +107,7 @@ function aEstrela(estadoInicial, estadoFinal) {
         caminho.push({estado: verticeAtual.estado, movimento: verticeAtual.movimento});
 
         if (verticeAtual.heuristica === 0) {
-            return caminho;
+            return verticeAtual;
         }
 
         const vizinhos = verticeAtual.obterVizinhos();

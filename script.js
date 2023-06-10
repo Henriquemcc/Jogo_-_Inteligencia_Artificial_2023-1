@@ -54,11 +54,11 @@ function calcularDistanciaDoisBlocos(bloco1, bloco2) {
 
 /**
  * Função executada quando um bloco for clicado.
- * @param {*} e 
+ * @param {*} e
  */
 function tratarCliqueNoBloco(e) {
 
-    if (modo === 'Jogo') {
+    if (modo === 'Jogo' || modo === 'Algoritmo') {
         let idBlocoSelecionado = e.target.id;
         let i = parseInt(idBlocoSelecionado.substring(idBlocoSelecionado.indexOf('_') + 1, idBlocoSelecionado.lastIndexOf('_')));
         let j = parseInt(idBlocoSelecionado.substring(idBlocoSelecionado.lastIndexOf('_') + 1, idBlocoSelecionado.length));
@@ -69,7 +69,7 @@ function tratarCliqueNoBloco(e) {
             // Alterando posição dos blocos
             blocosJogo.swap(blocoSelecionado, blocoVazio)
             blocosJogo.construirGrade();
-            
+
             // Exibindo mensagem de vitória ao jogador
             if (arraysSaoIguais(blocosJogo.array, blocosObjetivo.array)) {
                 venceuJogo();
@@ -77,8 +77,7 @@ function tratarCliqueNoBloco(e) {
         } else {
             window.alert("Bloco inválido");
         }
-    }
-    else if (modo === 'Nao Iniciado') {
+    } else if (modo === 'Nao Iniciado') {
         window.alert("O jogo não foi iniciado. Para iniciar o jogo clique no botão iniciar (representado pelo símbolo play)")
     }
 }
@@ -134,8 +133,8 @@ function novoJogo() {
 
     try {
         timer.stop();
+    } catch {
     }
-    catch {}
     timer = new Timer();
     modo = 'Nao Iniciado';
 }
@@ -143,7 +142,63 @@ function novoJogo() {
 /**
  * Função que é executado quando o botão A* é clicado.
  */
-function executarAEstrela() {}
+function executarAEstrela() {
+
+    // Configurando o temporizador
+    try {
+        timer.stop()
+    } catch {}
+    timer = new Timer();
+    timer.start();
+
+    // Alterando o modo do jogo
+    modo = 'Algoritmo';
+
+    // Executando o A Estrela
+    const verticeFinal = aEstrela(blocosJogo.array, blocosObjetivo.array);
+
+    // Utilizando a solução do A Estrela para resolver o Jogo
+    if (verticeFinal == null) {
+        window.alert("Não é possível resolver esse problema");
+    } else {
+
+        // Obtendo o caminho para resolver o Jogo
+        let cabecote = verticeFinal;
+        const caminho = [];
+        while (cabecote != null) {
+            caminho.push(cabecote);
+            cabecote = cabecote.pai;
+        }
+
+        // Clicando nos bolocos do Jogo
+        for (let i = caminho.length - 2; i >= 0; i--) {
+            const c = caminho[i];
+
+            // Identificando qual bloco clicar
+            const posicaoZero = obterPosicaoElementoArrayMultidimensional(0, blocosJogo.array);
+            let posicaoClique = null;
+            if (c.movimento === Movimento.CIMA) {
+                posicaoClique = [posicaoZero[0] - 1, posicaoZero[1]];
+            } else if (c.movimento === Movimento.BAIXO) {
+                posicaoClique = [posicaoZero[0] + 1, posicaoZero[1]];
+            } else if (c.movimento === Movimento.ESQUERDA) {
+                posicaoClique = [posicaoZero[0], posicaoZero[1] - 1];
+            } else if (c.movimento === Movimento.DIREITA) {
+                posicaoClique = [posicaoZero[0], posicaoZero[1] + 1];
+            }
+
+            // Clicando no bloco
+            document.getElementById(`areaJogo_${posicaoClique[0]}_${posicaoClique[1]}`).click();
+        }
+    }
+
+    // Parando o temporizador
+    timer.stop();
+
+    // Alterando o modo do jogo
+    modo = '';
+
+}
 
 /**
  * Função executada quando o botão Jogar é clicado.
