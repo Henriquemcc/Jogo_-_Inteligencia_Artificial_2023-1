@@ -2,17 +2,8 @@
  * Sai do menu editar.
  */
 function editarSair() {
-    // Desabilitando os botões confirmar e cancelar
-    document.getElementById("btConfirmar").style.display = 'none';
-    document.getElementById("btConfirmar").onclick = null;
-    document.getElementById("btCancelar").style.display = 'none';
-    document.getElementById("btCancelar").onclick = null;
 
-    // Habilitando os botões padrões
-    document.getElementById("btInicio").style.display = '';
-    document.getElementById("btAEstrela").style.display = '';
-    document.getElementById("btNovoJogo").style.display = '';
-    document.getElementById("btEditar").style.display = '';
+    desabilitarBotoesConfirmarCancelar();
 
     // Reconstruindo grades
     blocosObjetivo.construirGrade();
@@ -63,17 +54,8 @@ function editar() {
     // Parando o temporizador
     timer.stop();
 
-    // Desabilitando os botões padrões
-    document.getElementById("btInicio").style.display = 'none';
-    document.getElementById("btAEstrela").style.display = 'none';
-    document.getElementById("btNovoJogo").style.display = 'none';
-    document.getElementById("btEditar").style.display = 'none';
-
     // Habilitando os botões confirmar e cancelar
-    document.getElementById("btConfirmar").style.display = '';
-    document.getElementById("btConfirmar").onclick = editarConfirmar;
-    document.getElementById("btCancelar").style.display = '';
-    document.getElementById("btCancelar").onclick = editarCancelar;
+    habilitarBotoesConfirmarCancelar(editarConfirmar, editarCancelar);
 
     // Habilitando modo de edição
     blocosObjetivo.habilitarModoEdicao();

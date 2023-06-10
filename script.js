@@ -134,11 +134,7 @@ function novoJogo() {
 function executarAEstrela() {
 
     // Desabilitando os outros botões e mostrando barra de progresso
-    document.getElementById("btInicio").style.display = 'none';
-    document.getElementById("btAEstrela").style.display = 'none';
-    document.getElementById("btNovoJogo").style.display = 'none';
-    document.getElementById("btEditar").style.display = 'none';
-    document.getElementById("barraProgresso").style.display = '';
+    habilitarBarraDeProgresso();
 
     // Configurando o temporizador
     try {
@@ -160,11 +156,7 @@ function executarAEstrela() {
     modo = '';
 
     // Habilitando os outros botões e mostrando barra de progresso
-    document.getElementById("btInicio").style.display = '';
-    document.getElementById("btAEstrela").style.display = '';
-    document.getElementById("btNovoJogo").style.display = '';
-    document.getElementById("btEditar").style.display = '';
-    document.getElementById("barraProgresso").style.display = 'none';
+    desabilitarBarraDeProgresso();
 
 }
 
