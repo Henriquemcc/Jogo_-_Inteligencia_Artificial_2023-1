@@ -133,6 +133,13 @@ function novoJogo() {
  */
 function executarAEstrela() {
 
+    // Desabilitando os outros botões e mostrando barra de progresso
+    document.getElementById("btInicio").style.display = 'none';
+    document.getElementById("btAEstrela").style.display = 'none';
+    document.getElementById("btNovoJogo").style.display = 'none';
+    document.getElementById("btEditar").style.display = 'none';
+    document.getElementById("barraProgresso").style.display = '';
+
     // Configurando o temporizador
     try {
         timer.stop()
@@ -144,48 +151,20 @@ function executarAEstrela() {
     modo = 'Algoritmo';
 
     // Executando o A Estrela
-    const verticeFinal = aEstrela(blocosJogo.array, blocosObjetivo.array);
-
-    // Utilizando a solução do A Estrela para resolver o Jogo
-    if (verticeFinal == null) {
-        window.alert("Não é possível resolver esse problema");
-    } else {
-
-        // Obtendo o caminho para resolver o Jogo
-        let cabecote = verticeFinal;
-        const caminho = [];
-        while (cabecote != null) {
-            caminho.push(cabecote);
-            cabecote = cabecote.pai;
-        }
-
-        // Clicando nos bolocos do Jogo
-        for (let i = caminho.length - 2; i >= 0; i--) {
-            const c = caminho[i];
-
-            // Identificando qual bloco clicar
-            const posicaoZero = obterPosicaoElementoArrayMultidimensional(0, blocosJogo.array);
-            let posicaoClique = null;
-            if (c.movimento === Movimento.CIMA) {
-                posicaoClique = [posicaoZero[0] - 1, posicaoZero[1]];
-            } else if (c.movimento === Movimento.BAIXO) {
-                posicaoClique = [posicaoZero[0] + 1, posicaoZero[1]];
-            } else if (c.movimento === Movimento.ESQUERDA) {
-                posicaoClique = [posicaoZero[0], posicaoZero[1] - 1];
-            } else if (c.movimento === Movimento.DIREITA) {
-                posicaoClique = [posicaoZero[0], posicaoZero[1] + 1];
-            }
-
-            // Clicando no bloco
-            document.getElementById(`areaJogo_${posicaoClique[0]}_${posicaoClique[1]}`).click();
-        }
-    }
+    aEstrela();
 
     // Parando o temporizador
     timer.stop();
 
     // Alterando o modo do jogo
     modo = '';
+
+    // Habilitando os outros botões e mostrando barra de progresso
+    document.getElementById("btInicio").style.display = '';
+    document.getElementById("btAEstrela").style.display = '';
+    document.getElementById("btNovoJogo").style.display = '';
+    document.getElementById("btEditar").style.display = '';
+    document.getElementById("barraProgresso").style.display = 'none';
 
 }
 

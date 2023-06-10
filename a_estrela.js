@@ -89,12 +89,12 @@ class VerticeAEstrela {
 }
 
 /**
- * Executa o método de busca A Estrela.
+ * Executa o método de busca A Estrela, obtendo o vértice final.
  * @param estadoInicial {Array} Estado dos blocos que originará a busca.
  * @param estadoFinal {Array} Estado dos blocos que será buscado.
  * @returns {VerticeAEstrela} Vértice final cujos pais, avôs, bisavôs, ... são os caminhos a serem percorridos.
  */
-function aEstrela(estadoInicial, estadoFinal) {
+function obterVerticeFinalAEstrela(estadoInicial, estadoFinal) {
     const fila = [];
     const caminho = [];
 
@@ -130,4 +130,48 @@ function aEstrela(estadoInicial, estadoFinal) {
     }
 
     return null;
+}
+
+/**
+ * Executa o AEstrela para os blocos do 8-Puzzle.
+ */
+function aEstrela() {
+
+    // Executando o A Estrela
+    const verticeFinal = obterVerticeFinalAEstrela(blocosJogo.array, blocosObjetivo.array);
+
+    // Utilizando a solução do A Estrela para resolver o Jogo
+    if (verticeFinal == null) {
+        window.alert("Não é possível resolver esse problema");
+    } else {
+
+        // Obtendo o caminho para resolver o Jogo
+        let cabecote = verticeFinal;
+        const caminho = [];
+        while (cabecote != null) {
+            caminho.push(cabecote);
+            cabecote = cabecote.pai;
+        }
+
+        // Clicando nos bolocos do Jogo
+        for (let i = caminho.length - 2; i >= 0; i--) {
+            const c = caminho[i];
+
+            // Identificando qual bloco clicar
+            const posicaoZero = obterPosicaoElementoArrayMultidimensional(0, blocosJogo.array);
+            let posicaoClique = null;
+            if (c.movimento === Movimento.CIMA) {
+                posicaoClique = [posicaoZero[0] - 1, posicaoZero[1]];
+            } else if (c.movimento === Movimento.BAIXO) {
+                posicaoClique = [posicaoZero[0] + 1, posicaoZero[1]];
+            } else if (c.movimento === Movimento.ESQUERDA) {
+                posicaoClique = [posicaoZero[0], posicaoZero[1] - 1];
+            } else if (c.movimento === Movimento.DIREITA) {
+                posicaoClique = [posicaoZero[0], posicaoZero[1] + 1];
+            }
+
+            // Clicando no bloco
+            document.getElementById(`areaJogo_${posicaoClique[0]}_${posicaoClique[1]}`).click();
+        }
+    }
 }

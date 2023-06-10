@@ -39,3 +39,7 @@
     -webkit-appearance: none;
     margin: 0;
 }
+
+#barraProgresso {
+    width: 100%;
+}
