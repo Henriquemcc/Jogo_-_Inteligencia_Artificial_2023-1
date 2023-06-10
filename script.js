@@ -4,31 +4,37 @@
 
 /**
  * Área dos blocos do Objetivo
+ * @type {Grade}
  */
 let blocosObjetivo;
 
 /**
  * Área dos blocos do Jogo.
+ * @type {Grade}
  */
 let blocosJogo;
 
 /**
  * Modo de execução.
+ * @type {String}
  */
 let modo;
 
 /**
  * Número de colunas que a grade do jogo terá.
+ * @type {Number}
  */
 let numeroColunas;
 
 /**
  * Número de linhas que a grade do jogo terá.
+ * @type {Number}
  */
 let numeroLinhas;
 
 /**
  * Objeto que marcará o tempo no jogo
+ * @type {Timer}
  */
 let timer;
 
