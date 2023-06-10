@@ -15,12 +15,12 @@ function arraysSaoIguais(array1, array2) {
     for (let i = 0; i < array1.length; i++) {
 
         // Realizando recursividade caso seja um array multidimensional
-        if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
-            return arraysSaoIguais(array1[i], array2[i]);
+        if (Array.isArray(array1[i]) && Array.isArray(array2[i]) && (!arraysSaoIguais(array1[i], array2[i]))) {
+            return false;
         }
         // Comparando elemento por elemento
         else if (array1[i] !== array2[i]) {
-            return false
+            return false;
         }
     }
 
