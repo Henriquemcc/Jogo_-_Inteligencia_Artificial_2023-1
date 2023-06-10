@@ -116,7 +116,7 @@ function aEstrela(estadoInicial, estadoFinal) {
             // Verificando se o array de dicionários 'caminho' contém algum element cujo atributo 'estado' contém o 'estado' do vértice do vizinho
             let caminhoIncluiEstadoDoVizinho = false;
             for (const c of caminho) {
-                if (c['estado'] === vizinho.estado) {
+                if (arraysSaoIguais(c.estado, vizinho.estado)) {
                     caminhoIncluiEstadoDoVizinho = true;
                     break;
                 }
