@@ -93,15 +93,15 @@ function obterPosicaoElementoArrayMultidimensional(elementoProcurado, array) {
 /**
  * Troca dois elementos de posição em um array
  * @param {Array} array Array que será clonado e o clone terá elementos trocados de posição.
- * @param {Coordenada} coordenada1 Coordenada do primeiro elemento.
- * @param {Coordenada} coordenada2 Coordenada do segundo elemento.
+ * @param {Array} posicao1 Posição do primeiro elemento.
+ * @param {Array} posicao2 Posição do segundo elemento.
  * @returns {Array} Array clonada com os elementos trocados de posição.
  */
-function swap(array, coordenada1, coordenada2) {
+function swap(array, posicao1, posicao2) {
     array = clonarArrayMultidimensional(array);
-    let tmp = array[coordenada1.coluna][coordenada1.linha];
-    array[coordenada1.coluna][coordenada1.linha] = array[coordenada2.coluna][coordenada2.linha];
-    array[coordenada2.coluna][coordenada2.linha] = tmp;
+    let tmp = array[posicao1[0]][posicao1[1]];
+    array[posicao1[0]][posicao1[1]] = array[posicao2[0]][posicao2[1]];
+    array[posicao2[0]][posicao2[1]] = tmp;
     return array;
 }
 
