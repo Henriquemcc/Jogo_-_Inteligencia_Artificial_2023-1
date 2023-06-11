@@ -129,7 +129,7 @@ function novoJogo() {
 }
 
 /**
- * Função que é executado quando o botão A* é clicado.
+ * Função executada quando o botão A* é clicado.
  */
 function executarAEstrela() {
 
@@ -158,6 +158,18 @@ function executarAEstrela() {
     // Habilitando os outros botões e mostrando barra de progresso
     desabilitarBarraDeProgresso();
 
+}
+
+/**
+ * Função executada quando o botão Busca Gulosa é clicado.
+ */
+function executarBuscaGulosa() {
+
+    // Alterando o modo do jogo
+    modo = 'Algoritmo';
+
+    // Executando o Busca Gulosa
+    buscaGulosa();
 }
 
 /**
@@ -201,11 +213,12 @@ onload = function () {
     // Associando os botões com as funções
     document.getElementById("btInicio").onclick = iniciarJogo;
     document.getElementById("btAEstrela").onclick = executarAEstrela;
+    document.getElementById("btBuscaGulosa").onclick = executarBuscaGulosa;
     document.getElementById("btNovoJogo").onclick = novoJogo;
     document.getElementById("btEditar").onclick = editar;
 
     // Criando o jogo
-    const arrayJogo = [[1,2,3],[4,5,6],[7,8,0]];
+    const arrayJogo = [[8,3,5],[4,1,6],[2,7,0]];
     const arrayObjetivo = [[1,2,3],[8,0,4],[7,6,5]];
     criarJogo(arrayJogo, arrayObjetivo);
 }

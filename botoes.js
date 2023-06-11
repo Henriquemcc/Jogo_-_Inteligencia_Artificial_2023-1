@@ -4,6 +4,7 @@
 function habilitarBarraDeProgresso () {
     document.getElementById("btInicio").style.display = 'none';
     document.getElementById("btAEstrela").style.display = 'none';
+    document.getElementById("btBuscaGulosa").style.display = 'none';
     document.getElementById("btNovoJogo").style.display = 'none';
     document.getElementById("btEditar").style.display = 'none';
     document.getElementById("barraProgresso").style.display = '';
@@ -15,6 +16,7 @@ function habilitarBarraDeProgresso () {
 function desabilitarBarraDeProgresso() {
     document.getElementById("btInicio").style.display = '';
     document.getElementById("btAEstrela").style.display = '';
+    document.getElementById("btBuscaGulosa").style.display = '';
     document.getElementById("btNovoJogo").style.display = '';
     document.getElementById("btEditar").style.display = '';
     document.getElementById("barraProgresso").style.display = 'none';
@@ -30,6 +32,7 @@ function habilitarBotoesConfirmarCancelar(funcaoBotaoConfirmar, funcaoBotaoCance
     // Desabilitando os botões padrões
     document.getElementById("btInicio").style.display = 'none';
     document.getElementById("btAEstrela").style.display = 'none';
+    document.getElementById("btBuscaGulosa").style.display = 'none';
     document.getElementById("btNovoJogo").style.display = 'none';
     document.getElementById("btEditar").style.display = 'none';
 
@@ -54,6 +57,7 @@ function desabilitarBotoesConfirmarCancelar(){
     // Habilitando os botões padrões
     document.getElementById("btInicio").style.display = '';
     document.getElementById("btAEstrela").style.display = '';
+    document.getElementById("btBuscaGulosa").style.display = '';
     document.getElementById("btNovoJogo").style.display = '';
     document.getElementById("btEditar").style.display = '';
 }
