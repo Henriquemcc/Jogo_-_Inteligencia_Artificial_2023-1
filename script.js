@@ -71,7 +71,7 @@ function tratarCliqueNoBloco(e) {
             blocosJogo.construirGrade();
 
             // Exibindo mensagem de vitória ao jogador
-            if (arraysSaoIguais(blocosJogo.array, blocosObjetivo.array)) {
+            if (arraysSaoIguais(blocosJogo.array, blocosObjetivo.array) && modo === 'Jogo') {
                 venceuJogo();
             }
         } else {
