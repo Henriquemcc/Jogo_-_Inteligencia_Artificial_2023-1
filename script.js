@@ -165,11 +165,61 @@ function executarAEstrela() {
  */
 function executarBuscaGulosa() {
 
+    // Desabilitando os outros botões e mostrando barra de progresso
+    habilitarBarraDeProgresso();
+
+    // Configurando o temporizador
+    try {
+        timer.stop()
+    } catch {}
+    timer = new Timer();
+    timer.start();
+
     // Alterando o modo do jogo
     modo = 'Algoritmo';
 
     // Executando o Busca Gulosa
     buscaGulosa();
+
+    // Parando o temporizador
+    timer.stop();
+
+    // Alterando o modo do jogo
+    modo = '';
+
+    // Habilitando os outros botões e mostrando barra de progresso
+    desabilitarBarraDeProgresso();
+}
+
+/**
+ * Função executada quando o botão Busca Uniforme é clicado.
+ */
+function executarBuscaUniforme() {
+
+    // Desabilitando os outros botões e mostrando barra de progresso
+    habilitarBarraDeProgresso();
+
+    // Configurando o temporizador
+    try {
+        timer.stop()
+    } catch {}
+    timer = new Timer();
+    timer.start();
+
+    // Alterando o modo do jogo
+    modo = 'Algoritmo';
+
+    // Executando o Busca Uniforme
+    buscaUniforme();
+
+    // Parando o temporizador
+    timer.stop();
+
+    // Alterando o modo do jogo
+    modo = '';
+
+    // Habilitando os outros botões e mostrando barra de progresso
+    desabilitarBarraDeProgresso();
 }
 
 /**
@@ -214,6 +264,7 @@ onload = function () {
     document.getElementById("btInicio").onclick = iniciarJogo;
     document.getElementById("btAEstrela").onclick = executarAEstrela;
     document.getElementById("btBuscaGulosa").onclick = executarBuscaGulosa;
+    document.getElementById("btBuscaUniforme").onclick = executarBuscaUniforme;
     document.getElementById("btNovoJogo").onclick = novoJogo;
     document.getElementById("btEditar").onclick = editar;
 
