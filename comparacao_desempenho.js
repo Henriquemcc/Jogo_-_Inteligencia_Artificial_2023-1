@@ -73,7 +73,7 @@ function obterDesempenhoAEstrela() {
     const tempoExecucaoAEstrela = tempoFimAEstrela - tempoInicioAEstrela;
 
     // Mostrando o resultado do A Estrela
-    tagHtmlMensagem.innerHTML += `<p>A Estrela: ${tempoExecucaoAEstrela} milisegundos</p>`;
+    tagHtmlMensagem.innerHTML += `<p>A Estrela: ${tempoExecucaoAEstrela} milissegundos</p>`;
 
     // Voltando blocos ao estado inicial
     blocosJogo.array = estadoInicial;
@@ -104,7 +104,7 @@ function obterDesempenhoBuscaGulosa() {
     const tempoExecucaoBuscaGulosa = tempoFimBuscaGulosa - tempoInicioBuscaGulosa;
 
     // Mostrando o resultado do Busca Gulosa
-    tagHtmlMensagem.innerHTML += `<p>Busca Gulosa: ${tempoExecucaoBuscaGulosa} milisegundos</p>`;
+    tagHtmlMensagem.innerHTML += `<p>Busca Gulosa: ${tempoExecucaoBuscaGulosa} milissegundos</p>`;
 
     // Voltando blocos ao estado inicial
     blocosJogo.array = estadoInicial;
@@ -135,7 +135,7 @@ function obterDesempenhoBuscaUniforme() {
     const tempoExecucaoBuscaUniforme = tempoFimBuscaUniforme - tempoInicioBuscaUniforme;
 
     // Mostrando o resultado do Busca Uniforme
-    tagHtmlMensagem.innerHTML += `<p>Busca Uniforme: ${tempoExecucaoBuscaUniforme} milisegundos</p>`;
+    tagHtmlMensagem.innerHTML += `<p>Busca Uniforme: ${tempoExecucaoBuscaUniforme} milissegundos</p>`;
 
     // Voltando blocos ao estado inicial
     blocosJogo.array = estadoInicial;
