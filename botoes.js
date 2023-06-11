@@ -38,6 +38,7 @@ function habilitarBotoesConfirmarCancelar(funcaoBotaoConfirmar, funcaoBotaoCance
     document.getElementById("btBuscaUniforme").style.display = 'none';
     document.getElementById("btNovoJogo").style.display = 'none';
     document.getElementById("btEditar").style.display = 'none';
+    document.getElementById("btCompararDesempenho").style.display = 'none';
 
     // Habilitando os botões confirmar e cancelar
     document.getElementById("btConfirmar").style.display = '';
@@ -64,4 +65,5 @@ function desabilitarBotoesConfirmarCancelar(){
     document.getElementById("btBuscaUniforme").style.display = '';
     document.getElementById("btNovoJogo").style.display = '';
     document.getElementById("btEditar").style.display = '';
+    document.getElementById("btCompararDesempenho").style.display = '';
 }
