@@ -223,6 +223,62 @@ function executarBuscaUniforme() {
 }
 
 /**
+ * Função executada quando o botão comparar desempenho dos algoritmos é clicado.
+ */
+function compararDesempenhoAlgoritmos() {
+
+    // Obtendo a Tag HTML que mostrará a mensagem
+    const tagHtmlMensagem = document.getElementById("areaMensagem");
+
+    // Adicionando título a tag HTML
+    tagHtmlMensagem.innerHTML += "<h2>Tempo de execução dos Algoritmos de Busca</h2>"
+
+    // Armazenando o estado inicial
+    const estadoInicial = clonarArrayMultidimensional(blocosJogo.array);
+
+    // Executando o A Estrela
+    const tempoInicioAEstrela = performance.now();
+    executarAEstrela();
+    const tempoFimAEstrela = performance.now();
+    const tempoExecucaoAEstrela = tempoFimAEstrela - tempoInicioAEstrela;
+
+    // Mostrando o resultado do A Estrela
+    tagHtmlMensagem.innerHTML += `<p>A Estrela: ${tempoExecucaoAEstrela} milisegundos</p>`;
+
+    // Voltando blocos ao estado inicial
+    blocosJogo.array = estadoInicial;
+    blocosJogo.construirGrade();
+
+    // Executando a Busca Gulosa
+    const tempoInicioBuscaGulosa = performance.now();
+    executarBuscaGulosa();
+    const tempoFimBuscaGulosa = performance.now();
+    const tempoExecucaoBuscaGulosa = tempoFimBuscaGulosa - tempoInicioBuscaGulosa;
+
+    // Mostrando o resultado do Busca Gulosa
+    tagHtmlMensagem.innerHTML += `<p>Busca Gulosa: ${tempoExecucaoBuscaGulosa} milisegundos</p>`;
+
+    // Voltando blocos ao estado inicial
+    blocosJogo.array = estadoInicial;
+    blocosJogo.construirGrade();
+
+    return;
+
+    // Executando a Busca Uniforme
+    const tempoInicioBuscaUniforme = performance.now();
+    executarBuscaUniforme();
+    const tempoFimBuscaUniforme = performance.now();
+    const tempoExecucaoBuscaUniforme = tempoFimBuscaUniforme - tempoInicioBuscaUniforme;
+
+    // Mostrando o resultado do Busca Uniforme
+    tagHtmlMensagem.innerHTML += `<p>Busca Uniforme: ${tempoExecucaoBuscaUniforme} milisegundos</p>`;
+
+    // Voltando blocos ao estado inicial
+    blocosJogo.array = estadoInicial;
+    blocosJogo.construirGrade();
+}
+
+/**
  * Função executada quando o botão Jogar é clicado.
  */
 function iniciarJogo() {
@@ -265,6 +321,7 @@ onload = function () {
     document.getElementById("btAEstrela").onclick = executarAEstrela;
     document.getElementById("btBuscaGulosa").onclick = executarBuscaGulosa;
     document.getElementById("btBuscaUniforme").onclick = executarBuscaUniforme;
+    document.getElementById("btCompararDesempenho").onclick = compararDesempenhoAlgoritmos;
     document.getElementById("btNovoJogo").onclick = novoJogo;
     document.getElementById("btEditar").onclick = editar;
 
