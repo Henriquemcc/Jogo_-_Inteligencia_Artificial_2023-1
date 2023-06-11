@@ -91,7 +91,7 @@ function buscaUniforme() {
             const verticeAtual = fila.shift();
             caminho.push(verticeAtual.estado);
 
-            if (verticeAtual.heuristica === 0) {
+            if (arraysSaoIguais(verticeAtual.estado, estadoFinal)) {
                 return verticeAtual;
             }
 
