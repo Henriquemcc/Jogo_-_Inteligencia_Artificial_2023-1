@@ -17,12 +17,12 @@ function aEstrela() {
     /**
      * Vértice do grafo utilizado na busca do caminho para encontrar o objetivo utilizando o algoritmo A Estrela.
      */
-    class VerticeAEstrela {
+    class Vertice {
 
         /**
-         * Constrói uma nova instância da classe VerticeAEstrela
+         * Constrói uma nova instância da classe Vertice
          * @param estado {Array} Estado dos blocos para o vértice atual.
-         * @param pai {VerticeAEstrela} Vértice pai deste vértice na busca pelo A Estrela.
+         * @param pai {Vertice} Vértice pai deste vértice na busca pelo A Estrela.
          * @param movimento {Movimento} Movimento que foi feito no vértice pai para resultar neste vértice.
          * @param custo {Number} Custo para chegar do vértice inicial á este vértice.
          * @param estadoObjetivo {Array} Estado dos blocos para qual a busca deseja chegar.
@@ -96,13 +96,13 @@ function aEstrela() {
      * Executa o método de busca A Estrela, obtendo o vértice final.
      * @param estadoInicial {Array} Estado dos blocos que originará a busca.
      * @param estadoFinal {Array} Estado dos blocos que será buscado.
-     * @returns {VerticeAEstrela} Vértice final cujos pais, avôs, bisavôs, ... são os caminhos a serem percorridos.
+     * @returns {Vertice} Vértice final cujos pais, avôs, bisavôs, ... são os caminhos a serem percorridos.
      */
-    function obterVerticeFinalAEstrela(estadoInicial, estadoFinal) {
+    function obterVerticeFinal(estadoInicial, estadoFinal) {
         const fila = [];
         const caminho = [];
 
-        const verticeInicial = new VerticeAEstrela(estadoInicial, null, null, 0, estadoFinal);
+        const verticeInicial = new Vertice(estadoInicial, null, null, 0, estadoFinal);
         fila.push(verticeInicial);
 
         while (fila.length > 0) {
@@ -127,7 +127,7 @@ function aEstrela() {
                 }
 
                 if (!caminhoIncluiEstadoDoVizinho) {
-                    const novoVertice = new VerticeAEstrela(vizinho.estado, verticeAtual, vizinho.movimento, verticeAtual.custo + 1, estadoFinal);
+                    const novoVertice = new Vertice(vizinho.estado, verticeAtual, vizinho.movimento, verticeAtual.custo + 1, estadoFinal);
                     fila.push(novoVertice);
                 }
             }
@@ -137,7 +137,7 @@ function aEstrela() {
     }
 
     // Executando o A Estrela
-    const verticeFinal = obterVerticeFinalAEstrela(blocosJogo.array, blocosObjetivo.array);
+    const verticeFinal = obterVerticeFinal(blocosJogo.array, blocosObjetivo.array);
 
     // Utilizando a solução do A Estrela para resolver o Jogo
     if (verticeFinal == null) {
