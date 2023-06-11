@@ -33,6 +33,7 @@ function aEstrela() {
             this.movimento = movimento;
             this.custo = custo;
             this.heuristica = this.calcularHeuristica(estadoObjetivo);
+            console.log(this);
         }
 
         /**
@@ -108,7 +109,7 @@ function aEstrela() {
         while (fila.length > 0) {
             fila.sort((a, b) => (a.custo + a.heuristica) - (b.custo + b.heuristica));
             const verticeAtual = fila.shift();
-            caminho.push({estado: verticeAtual.estado, movimento: verticeAtual.movimento});
+            caminho.push(verticeAtual.estado);
 
             if (verticeAtual.heuristica === 0) {
                 return verticeAtual;
@@ -116,17 +117,7 @@ function aEstrela() {
 
             const vizinhos = verticeAtual.obterVizinhos();
             for (const vizinho of vizinhos) {
-
-                // Verificando se o array de dicionários 'caminho' contém algum element cujo atributo 'estado' contém o 'estado' do vértice do vizinho
-                let caminhoIncluiEstadoDoVizinho = false;
-                for (const c of caminho) {
-                    if (arraysSaoIguais(c.estado, vizinho.estado)) {
-                        caminhoIncluiEstadoDoVizinho = true;
-                        break;
-                    }
-                }
-
-                if (!caminhoIncluiEstadoDoVizinho) {
+                if (!caminho.includes(vizinho.estado)) {
                     const novoVertice = new Vertice(vizinho.estado, verticeAtual, vizinho.movimento, verticeAtual.custo + 1, estadoFinal);
                     fila.push(novoVertice);
                 }
