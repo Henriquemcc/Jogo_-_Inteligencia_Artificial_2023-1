@@ -33,7 +33,6 @@ function aEstrela() {
             this.movimento = movimento;
             this.custo = custo;
             this.heuristica = this.calcularHeuristica(estadoObjetivo);
-            console.log(this);
         }
 
         /**
