@@ -20,6 +20,23 @@ function distanciaManhattan (estadoObjetivo) {
  * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
  * @returns {number} Heurística deste vértice.
  */
+function distanciaEuclidiana (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        heuristica += Math.sqrt(Math.pow(posicaoElementoEstadoAtual[0] - posicaoElementoEstadoObjetivo[0], 2) + Math.pow(posicaoElementoEstadoAtual[1] - posicaoElementoEstadoObjetivo[1], 2))
+    }
+
+    return heuristica;
+}
+
+/**
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
+ */
 function numeroDePecasForaDoLugar (estadoObjetivo) {
     let heuristica = 0;
 
