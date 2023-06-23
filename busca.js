@@ -155,14 +155,14 @@ function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
                 fila.sort((a, b) => (a.custo + a.heuristica) - (b.custo + b.heuristica));
             } else if ((!habilitarCusto) && funcaoHeuristica != null) { // Busca Gulosa
                 fila.sort((a, b) => a.heuristica - b.heuristica);
-            } else if (habilitarCusto && funcaoHeuristica === null) { // Busca Uniforme
+            } else if (habilitarCusto && funcaoHeuristica == null) { // Busca Uniforme
                 fila.sort((a, b) => a.custo - b.custo);
             }
 
             const verticeAtual = fila.shift();
             caminho.push(verticeAtual.estado);
 
-            if (verticeAtual.heuristica === 0) {
+            if (arraysSaoIguais(verticeAtual.estado, estadoFinal) || verticeAtual.heuristica === 0) {
                 return verticeAtual;
             }
 
