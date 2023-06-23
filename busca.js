@@ -1,7 +1,24 @@
 /**
- * Executa a Busca Uniforme para os blocos do 8-Puzzle.
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
  */
-function buscaUniforme() {
+function distanciaManhattan (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        heuristica += Math.abs(posicaoElementoEstadoAtual[0] - posicaoElementoEstadoObjetivo[0]) + Math.abs(posicaoElementoEstadoAtual[1] - posicaoElementoEstadoObjetivo[1]);
+    }
+
+    return heuristica;
+}
+
+/**
+ * Executa o AEstrela para os blocos do 8-Puzzle.
+ */
+function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
 
     /**
      * Enum com os tipos de movimentos que podem ser realizados no 8-Puzzle
@@ -15,22 +32,27 @@ function buscaUniforme() {
     }
 
     /**
-     * Vértice do grafo utilizado na busca do caminho para encontrar o objetivo utilizando o algoritmo Busca Uniforme.
+     * Vértice do grafo utilizado na busca do caminho para encontrar o objetivo utilizando o algoritmo A Estrela.
      */
     class Vertice {
 
         /**
          * Constrói uma nova instância da classe Vertice
          * @param estado {Array} Estado dos blocos para o vértice atual.
-         * @param pai {Vertice} Vértice pai deste vértice na busca pela Busca Uniforme.
+         * @param pai {Vertice} Vértice pai deste vértice na busca pelo A Estrela.
          * @param movimento {Movimento} Movimento que foi feito no vértice pai para resultar neste vértice.
          * @param custo {Number} Custo para chegar do vértice inicial á este vértice.
+         * @param estadoObjetivo {Array} Estado dos blocos para qual a busca deseja chegar.
          */
-        constructor(estado, pai, movimento, custo) {
+        constructor(estado, pai, movimento, custo, estadoObjetivo) {
             this.estado = estado;
             this.pai = pai;
             this.movimento = movimento;
             this.custo = custo;
+            if (funcaoHeuristica != null) {
+                this.calcularHeuristica = funcaoHeuristica;
+                this.heuristica = this.calcularHeuristica(estadoObjetivo);
+            }
         }
 
         /**
@@ -74,7 +96,7 @@ function buscaUniforme() {
     }
 
     /**
-     * Executa a Busca Uniforme, obtendo o vértice final.
+     * Executa o método de busca A Estrela, obtendo o vértice final.
      * @param estadoInicial {Array} Estado dos blocos que originará a busca.
      * @param estadoFinal {Array} Estado dos blocos que será buscado.
      * @returns {Vertice} Vértice final cujos pais, avôs, bisavôs, ... são os caminhos a serem percorridos.
@@ -83,22 +105,29 @@ function buscaUniforme() {
         const fila = [];
         const caminho = [];
 
-        const verticeInicial = new Vertice(estadoInicial, null, null, 0);
+        const verticeInicial = new Vertice(estadoInicial, null, null, 0, estadoFinal);
         fila.push(verticeInicial);
 
         while (fila.length > 0) {
-            fila.sort((a, b) => a.custo - b.custo);
+            if (habilitarCusto && funcaoHeuristica != null) { // A Estrela
+                fila.sort((a, b) => (a.custo + a.heuristica) - (b.custo + b.heuristica));
+            } else if ((!habilitarCusto) && funcaoHeuristica != null) { // Busca Gulosa
+                fila.sort((a, b) => a.heuristica - b.heuristica);
+            } else if (habilitarCusto && funcaoHeuristica === null) { // Busca Uniforme
+                fila.sort((a, b) => a.custo - b.custo);
+            }
+
             const verticeAtual = fila.shift();
             caminho.push(verticeAtual.estado);
 
-            if (arraysSaoIguais(verticeAtual.estado, estadoFinal)) {
+            if (verticeAtual.heuristica === 0) {
                 return verticeAtual;
             }
 
             const vizinhos = verticeAtual.obterVizinhos();
             for (const vizinho of vizinhos) {
                 if (!caminho.includes(vizinho.estado)) {
-                    const novoVertice = new Vertice(vizinho.estado, verticeAtual, vizinho.movimento, verticeAtual.custo + 1);
+                    const novoVertice = new Vertice(vizinho.estado, verticeAtual, vizinho.movimento, verticeAtual.custo + 1, estadoFinal);
                     fila.push(novoVertice);
                 }
             }
@@ -107,10 +136,10 @@ function buscaUniforme() {
         return null;
     }
 
-    // Executando a Busca Uniforme
+    // Executando o A Estrela
     const verticeFinal = obterVerticeFinal(blocosJogo.array, blocosObjetivo.array);
 
-    // Utilizando a solução da Busca Uniforme para resolver o Jogo
+    // Utilizando a solução do A Estrela para resolver o Jogo
     if (verticeFinal == null) {
         window.alert("Não é possível resolver esse problema");
     } else {
@@ -144,4 +173,25 @@ function buscaUniforme() {
             document.getElementById(`areaJogo_${posicaoClique[0]}_${posicaoClique[1]}`).click();
         }
     }
+}
+
+/**
+ * Executa o AEstrela para os blocos do 8-Puzzle.
+ */
+function aEstrela() {
+    busca(true, distanciaManhattan);
+}
+
+/**
+ * Executa o Busca Gulosa para os blocos do 8-Puzzle.
+ */
+function buscaGulosa() {
+    busca(false, distanciaManhattan);
+}
+
+/**
+ * Executa a Busca Uniforme para os blocos do 8-Puzzle.
+ */
+function buscaUniforme() {
+    busca(true, null);
 }
