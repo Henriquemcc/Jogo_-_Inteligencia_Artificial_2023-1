@@ -218,17 +218,37 @@ function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
 }
 
 /**
+ * Obtém a heurística selecionada pelo usuário.
+ * @returns {Function} Função de heurística selecionada.
+ */
+function obterHeuristica() {
+    let heuristica = document.getElementById('selectHeuristica').value
+
+    if (heuristica === 'distanciaManhattan') {
+        heuristica = distanciaManhattan;
+    } else if (heuristica === 'distanciaEuclidiana') {
+        heuristica = distanciaEuclidiana;
+    } else if (heuristica === 'numeroDePecasForaDoLugar') {
+        heuristica = numeroDePecasForaDoLugar;
+    } else {
+        heuristica = null;
+    }
+
+    return heuristica;
+}
+
+/**
  * Executa o AEstrela para os blocos do 8-Puzzle.
  */
 function aEstrela() {
-    busca(true, distanciaManhattan);
+    busca(true, obterHeuristica());
 }
 
 /**
  * Executa o Busca Gulosa para os blocos do 8-Puzzle.
  */
 function buscaGulosa() {
-    busca(false, distanciaManhattan);
+    busca(false, obterHeuristica());
 }
 
 /**

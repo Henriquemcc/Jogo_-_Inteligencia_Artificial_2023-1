@@ -18,6 +18,7 @@ function editar() {
         document.getElementById("btNovoJogo").style.display = 'none';
         document.getElementById("btEditar").style.display = 'none';
         document.getElementById("btCompararDesempenho").style.display = 'none';
+        document.getElementById('formHeuristica').style.display = 'none';
 
         // Habilitando os botões confirmar e cancelar
         document.getElementById("btConfirmar").style.display = '';
@@ -45,6 +46,7 @@ function editar() {
         document.getElementById("btNovoJogo").style.display = '';
         document.getElementById("btEditar").style.display = '';
         document.getElementById("btCompararDesempenho").style.display = '';
+        document.getElementById('formHeuristica').style.display = '';
     }
 
     /**
