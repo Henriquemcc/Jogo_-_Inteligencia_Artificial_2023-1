@@ -16,6 +16,25 @@ function distanciaManhattan (estadoObjetivo) {
 }
 
 /**
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
+ */
+function numeroDePecasForaDoLugar (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        if (!arraysSaoIguais(posicaoElementoEstadoAtual, posicaoElementoEstadoObjetivo)) {
+            heuristica++;
+        }
+    }
+
+    return heuristica;
+}
+
+/**
  * Executa o AEstrela para os blocos do 8-Puzzle.
  */
 function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
