@@ -35,7 +35,12 @@ function numeroDePecasForaDoLugar (estadoObjetivo) {
 }
 
 /**
- * Executa o AEstrela para os blocos do 8-Puzzle.
+ * Executa o AEstrela, Busca Gulosa ou Busca Uniforme para os blocos do 8-Puzzle.
+ * O AEstrela só será executado caso o parâmetro habilitarCusto seja verdadeiro, e o parâmetro funcaoHeuristica não seja nulo.
+ * A Busca Gulosa só será executada caso o parâmetro habilitarCusto seja falso, e o parâmetro funcaoHeuristica não seja nulo.
+ * A Busca Uniforme só será executada caso o parâmetro habilitarCusto seja verdadeiro e o parâmetro funcaoHeuristica seja nulo.
+ * @param habilitarCusto {Boolean} Habilita o uso do custo da origem na busca.
+ * @param funcaoHeuristica {Function} Função utilizada para calcular a heurística da busca ou null, caso deseja desabilitar o uso da heurística.
  */
 function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
 
