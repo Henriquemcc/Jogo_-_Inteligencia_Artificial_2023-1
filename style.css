@@ -40,6 +40,14 @@
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 #barraProgresso {
     width: 100%;
+}
+
+#formHeuristica {
+    margin-top: 10px;
 }

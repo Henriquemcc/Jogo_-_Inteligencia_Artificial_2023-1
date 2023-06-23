@@ -1,7 +1,65 @@
 /**
- * Executa o AEstrela para os blocos do 8-Puzzle.
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
  */
-function aEstrela() {
+function distanciaManhattan (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        heuristica += Math.abs(posicaoElementoEstadoAtual[0] - posicaoElementoEstadoObjetivo[0]) + Math.abs(posicaoElementoEstadoAtual[1] - posicaoElementoEstadoObjetivo[1]);
+    }
+
+    return heuristica;
+}
+
+/**
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
+ */
+function distanciaEuclidiana (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        heuristica += Math.sqrt(Math.pow(posicaoElementoEstadoAtual[0] - posicaoElementoEstadoObjetivo[0], 2) + Math.pow(posicaoElementoEstadoAtual[1] - posicaoElementoEstadoObjetivo[1], 2))
+    }
+
+    return heuristica;
+}
+
+/**
+ * Função de heurística a ser utilizada nas Buscas Gulosa e A Estrela.
+ * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
+ * @returns {number} Heurística deste vértice.
+ */
+function numeroDePecasForaDoLugar (estadoObjetivo) {
+    let heuristica = 0;
+
+    for (let elemento = 1; elemento <= 8; elemento++) {
+        let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
+        let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
+        if (!arraysSaoIguais(posicaoElementoEstadoAtual, posicaoElementoEstadoObjetivo)) {
+            heuristica++;
+        }
+    }
+
+    return heuristica;
+}
+
+/**
+ * Executa o AEstrela, Busca Gulosa ou Busca Uniforme para os blocos do 8-Puzzle.
+ * O AEstrela só será executado caso o parâmetro habilitarCusto seja verdadeiro, e o parâmetro funcaoHeuristica não seja nulo.
+ * A Busca Gulosa só será executada caso o parâmetro habilitarCusto seja falso, e o parâmetro funcaoHeuristica não seja nulo.
+ * A Busca Uniforme só será executada caso o parâmetro habilitarCusto seja verdadeiro e o parâmetro funcaoHeuristica seja nulo.
+ * @param habilitarCusto {Boolean} Habilita o uso do custo da origem na busca.
+ * @param funcaoHeuristica {Function} Função utilizada para calcular a heurística da busca ou null, caso deseja desabilitar o uso da heurística.
+ */
+function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
 
     /**
      * Enum com os tipos de movimentos que podem ser realizados no 8-Puzzle
@@ -32,24 +90,11 @@ function aEstrela() {
             this.pai = pai;
             this.movimento = movimento;
             this.custo = custo;
-            this.heuristica = this.calcularHeuristica(estadoObjetivo);
-        }
-
-        /**
-         * Calcula a heurística deste vértice
-         * @param estadoObjetivo {Array} Estado dos blocos para o qual deseja-se chegar.
-         * @returns {number} Heurística deste vértice.
-         */
-        calcularHeuristica(estadoObjetivo) {
-            let heuristica = 0;
-
-            for (let elemento = 1; elemento <= 8; elemento++) {
-                let posicaoElementoEstadoAtual = obterPosicaoElementoArrayMultidimensional(elemento, this.estado);
-                let posicaoElementoEstadoObjetivo = obterPosicaoElementoArrayMultidimensional(elemento, estadoObjetivo);
-                heuristica += Math.abs(posicaoElementoEstadoAtual[0] - posicaoElementoEstadoObjetivo[0]) + Math.abs(posicaoElementoEstadoAtual[1] - posicaoElementoEstadoObjetivo[1]);
+            if (funcaoHeuristica != null) {
+                this.calcularHeuristica = funcaoHeuristica;
+                this.heuristica = this.calcularHeuristica(estadoObjetivo);
             }
-
-            return heuristica;
+            console.log(this);
         }
 
         /**
@@ -106,7 +151,14 @@ function aEstrela() {
         fila.push(verticeInicial);
 
         while (fila.length > 0) {
-            fila.sort((a, b) => (a.custo + a.heuristica) - (b.custo + b.heuristica));
+            if (habilitarCusto && funcaoHeuristica != null) { // A Estrela
+                fila.sort((a, b) => (a.custo + a.heuristica) - (b.custo + b.heuristica));
+            } else if ((!habilitarCusto) && funcaoHeuristica != null) { // Busca Gulosa
+                fila.sort((a, b) => a.heuristica - b.heuristica);
+            } else if (habilitarCusto && funcaoHeuristica === null) { // Busca Uniforme
+                fila.sort((a, b) => a.custo - b.custo);
+            }
+
             const verticeAtual = fila.shift();
             caminho.push(verticeAtual.estado);
 
@@ -163,4 +215,45 @@ function aEstrela() {
             document.getElementById(`areaJogo_${posicaoClique[0]}_${posicaoClique[1]}`).click();
         }
     }
+}
+
+/**
+ * Obtém a heurística selecionada pelo usuário.
+ * @returns {Function} Função de heurística selecionada.
+ */
+function obterHeuristica() {
+    let heuristica = document.getElementById('selectHeuristica').value
+
+    if (heuristica === 'distanciaManhattan') {
+        heuristica = distanciaManhattan;
+    } else if (heuristica === 'distanciaEuclidiana') {
+        heuristica = distanciaEuclidiana;
+    } else if (heuristica === 'numeroDePecasForaDoLugar') {
+        heuristica = numeroDePecasForaDoLugar;
+    } else {
+        heuristica = null;
+    }
+
+    return heuristica;
+}
+
+/**
+ * Executa o AEstrela para os blocos do 8-Puzzle.
+ */
+function aEstrela() {
+    busca(true, obterHeuristica());
+}
+
+/**
+ * Executa o Busca Gulosa para os blocos do 8-Puzzle.
+ */
+function buscaGulosa() {
+    busca(false, obterHeuristica());
+}
+
+/**
+ * Executa a Busca Uniforme para os blocos do 8-Puzzle.
+ */
+function buscaUniforme() {
+    busca(true, null);
 }

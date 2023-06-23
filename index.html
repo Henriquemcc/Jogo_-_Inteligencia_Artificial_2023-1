@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Jogo do 8-Puzzle</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="style.css" rel="stylesheet">
     <script src="timer.js"></script>
     <script src="bloco_completo.js"></script>
     <script src="coordenada.js"></script>
@@ -14,102 +14,125 @@
     <script src="botoes.js"></script>
     <script src="editar.js"></script>
     <script src="grade.js"></script>
-    <script src="a_estrela.js"></script>
-    <script src="busca_gulosa.js"></script>
-    <script src="busca_uniforme.js"></script>
+    <script src="busca.js"></script>
     <script src="comparacao_desempenho.js"></script>
     <script src="script.js"></script>
     <!-- CSS do Boot Strap: Inicio -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-        integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
-        crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+          rel="stylesheet">
     <!-- CSS do BootStrap: Fim -->
     <!-- CSS do Font Awesome: Inicio -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"
+          integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+          rel="stylesheet">
     <!-- CSS do Font Awesome: Fim -->
 </head>
 
 <body>
-    <main class="container">
+<main class="container">
 
-        <!-- Área do Título: Inicio -->
-        <div class="row">
-            <div class="col">
-                <h1>Jogo do 8-Puzzle</h1>
-            </div>
+    <!-- Área do Título: Inicio -->
+    <div class="row">
+        <div class="col">
+            <h1>Jogo do 8-Puzzle</h1>
         </div>
-        <!-- Área do Título: Fim -->
+    </div>
+    <!-- Área do Título: Fim -->
 
-        <!-- Área do Timer: Inicio -->
-        <div class="row">
-            <div class="col">
-                <p id="timer">00:00:00:00</p>
-            </div>
+    <!-- Área do Timer: Inicio -->
+    <div class="row">
+        <div class="col">
+            <p id="timer">00:00:00:00</p>
         </div>
-        <!-- Área do Timer: Fim -->
-        
-        <div class="row">
+    </div>
+    <!-- Área do Timer: Fim -->
 
-            <!-- Espaço vazio entre o objetivo e o canto esquerdo -->
-            <div class="col-xl-1 col-lg-1"></div>
+    <div class="row">
 
-            <!-- Objetivo do Jogo: Inicio -->
-            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                <div class="container">
-                    <div class="row">
-                       <h2>Objetivo</h2> 
-                    </div>
-                    <div class="row" id="areaObjetivo"></div>
+        <!-- Espaço vazio entre o objetivo e o canto esquerdo -->
+        <div class="col-xl-1 col-lg-1"></div>
+
+        <!-- Objetivo do Jogo: Inicio -->
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+            <div class="container">
+                <div class="row">
+                    <h2>Objetivo</h2>
                 </div>
+                <div class="row" id="areaObjetivo"></div>
             </div>
-            <!-- Objetivo do Jogo: Fim -->
-
-            <!-- Espaço vazio entre o objetivo e o jogo -->
-            <div class="col-xl-2 col-lg-2"></div>
-
-            <!-- Jogo: Inicio -->
-            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-                <div class="container">
-                    <div class="row">
-                       <h2>Jogo</h2>
-                    </div>
-                    <div class="row" id="areaJogo"></div>
-                </div>
-            </div>
-            <!-- Jogo: Fim -->
-
-            <!-- Espaço vazio entre o jogo e o canto direito -->
-            <div class="col-xl-1 col-lg-1"></div>
-
         </div>
-        
+        <!-- Objetivo do Jogo: Fim -->
 
-        <!-- Área dos controles do Jogo: Inicio -->
-        <div class="row" id="areaControles">
+        <!-- Espaço vazio entre o objetivo e o jogo -->
+        <div class="col-xl-2 col-lg-2"></div>
+
+        <!-- Jogo: Inicio -->
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+            <div class="container">
+                <div class="row">
+                    <h2>Jogo</h2>
+                </div>
+                <div class="row" id="areaJogo"></div>
+            </div>
+        </div>
+        <!-- Jogo: Fim -->
+
+        <!-- Espaço vazio entre o jogo e o canto direito -->
+        <div class="col-xl-1 col-lg-1"></div>
+
+    </div>
+
+
+    <!-- Área dos controles do Jogo: Inicio -->
+    <div class="row" id="areaControles">
+        <div class="row">
             <div class="col">
-                <button id="btInicio" type="button" class="btn btn-primary btn-lg" value="Iniciar"><i class="fa fa-play" aria-hidden="true"></i></button>
-                <button id="btAEstrela" type="button" class="btn btn-success btn-lg">A*</button>
-                <button id="btBuscaGulosa" type="button" class="btn btn-success btn-lg">Busca Gulosa</button>
-                <button id="btBuscaUniforme" type="button" class="btn btn-success btn-lg">Busca Uniforme</button>
-                <button id="btConfirmar" type="button" class="btn btn-success btn-lg" value="Confirmar" style="display: none;"><i class="fa fa-check" aria-hidden="true"></i></button>
-                <button id="btCancelar" type="button" class="btn btn-danger btn-lg" value="Cancelar" style="display: none;"><i class="fa fa-ban" aria-hidden="true"></i></button>
-                <button id="btCompararDesempenho" type="button" class="btn btn-success btn-lg">Comparar desempenho dos algoritmos</button>
-                <button id="btNovoJogo" type="button" class="btn btn-danger btn-lg" value="Novo Jogo"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-                <button id="btEditar" type="button" class="btn btn-danger btn-lg" value="Editar"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                <button class="btn btn-primary btn-lg" id="btInicio" type="button" value="Iniciar"><i aria-hidden="true"
+                                                                                                      class="fa fa-play"></i>
+                </button>
+                <button class="btn btn-success btn-lg" id="btAEstrela" type="button">A*</button>
+                <button class="btn btn-success btn-lg" id="btBuscaGulosa" type="button">Busca Gulosa</button>
+                <button class="btn btn-success btn-lg" id="btBuscaUniforme" type="button">Busca Uniforme</button>
+                <button class="btn btn-success btn-lg" id="btConfirmar" style="display: none;" type="button"
+                        value="Confirmar"><i aria-hidden="true" class="fa fa-check"></i></button>
+                <button class="btn btn-danger btn-lg" id="btCancelar" style="display: none;" type="button"
+                        value="Cancelar"><i aria-hidden="true" class="fa fa-ban"></i></button>
+                <button class="btn btn-success btn-lg" id="btCompararDesempenho" type="button">Comparar desempenho dos
+                    algoritmos
+                </button>
+                <button class="btn btn-danger btn-lg" id="btNovoJogo" type="button" value="Novo Jogo"><i
+                        aria-hidden="true" class="fa fa-refresh"></i></button>
+                <button class="btn btn-danger btn-lg" id="btEditar" type="button" value="Editar"><i aria-hidden="true"
+                                                                                                    class="fa fa-pencil"></i>
+                </button>
                 <progress id="barraProgresso" style="display: none"></progress>
             </div>
         </div>
-        <!-- Área dos controles do Jogo: Fim -->
+        <div class="row">
+            <div class="col">
+                <form id="formHeuristica">
+                    <label for="selectHeuristica">Heurística:</label>
+                    <select id="selectHeuristica" name="heuristica">
+                        <option value="distanciaManhattan">Distância de Manhattan</option>
+                        <option value="distanciaEuclidiana">Distancia Euclidiana</option>
+                        <option value="numeroDePecasForaDoLugar">Número de Peças Fora do Lugar</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Área dos controles do Jogo: Fim -->
 
-        <!-- Área de mensagem como o usuário -->
-        <div class="row" id="areaMensagem"></div>
+    <!-- Área de mensagem como o usuário -->
+    <div class="row" id="areaMensagem"></div>
 
-    </main>
-    <!-- JavaScript do BootStrap: Inicio -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+</main>
+<!-- JavaScript do BootStrap: Inicio -->
+<script crossorigin="anonymous"
         integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img=="
-        crossorigin="anonymous"></script>
-    <!-- JavaScript do BootStrap: Fim -->
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript do BootStrap: Fim -->
 </body>
 
 </html>
