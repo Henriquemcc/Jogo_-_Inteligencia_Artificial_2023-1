@@ -94,6 +94,7 @@ function busca(habilitarCusto = true, funcaoHeuristica = distanciaManhattan) {
                 this.calcularHeuristica = funcaoHeuristica;
                 this.heuristica = this.calcularHeuristica(estadoObjetivo);
             }
+            console.log(this);
         }
 
         /**
