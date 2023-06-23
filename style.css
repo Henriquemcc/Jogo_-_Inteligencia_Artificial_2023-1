@@ -40,6 +40,10 @@
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
 #barraProgresso {
     width: 100%;
 }
